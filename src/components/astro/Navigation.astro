@@ -1,0 +1,820 @@
+---
+import type { Lang } from '../../i18n';
+import { useTranslations, getLocalizedPath } from '../../i18n';
+import { ui } from '../../i18n/ui';
+
+interface Props { lang?: Lang; }
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(ui);
+const currentPath = Astro.url.pathname;
+const prefix = lang === 'es' ? '' : '/en';
+
+const navItems = [
+	{ href: `${prefix}/#hero`, label: t(lang, 'nav.home'), matchPath: `${prefix}/` },
+	{ href: `${prefix}/#projects`, label: t(lang, 'nav.projects'), matchPath: '/__never__' },
+	{ href: `${prefix}/blog`, label: t(lang, 'nav.blog'), matchPath: `${prefix}/blog` },
+	{
+		href: lang === 'es' ? '/programa-tu-mente-podcast' : '/en/program-your-mind-podcast',
+		label: t(lang, 'nav.podcast'),
+		matchPath: lang === 'es' ? '/programa-tu-mente-podcast' : '/en/program-your-mind-podcast',
+	},
+	{ href: `${prefix}/about`, label: t(lang, 'nav.about'), matchPath: `${prefix}/about` },
+];
+
+function isActive(item: typeof navItems[0]): boolean {
+	const path = currentPath.replace(/\/$/, '') || '/';
+	const match = item.matchPath.replace(/\/$/, '') || '/';
+	if (match === '/__never__') return false;
+	if (match === `${prefix}/blog`) return path === match || path.startsWith(`${prefix}/blog/`);
+	return path === match;
+}
+
+const otherLang: Lang = lang === 'es' ? 'en' : 'es';
+const switchPath = getLocalizedPath(currentPath, otherLang);
+---
+
+<nav id="main-nav" aria-label="Main navigation">
+	<div class="nav-container">
+		<a href={`${prefix}/`} class="logo" aria-label={`DC - ${t(lang, 'nav.home')}`}>
+			<span class="logo-text">DC</span>
+			<span class="logo-glow"></span>
+		</a>
+
+		<div class="nav-pill">
+			<ul class="nav-links">
+				{navItems.map((item, index) => (
+					<li class="nav-item" style={`--nav-index: ${index}`}>
+						<a
+							href={item.href}
+							class:list={['nav-link', { active: isActive(item) }]}
+							aria-current={isActive(item) ? 'page' : undefined}
+						>
+							<span class="link-text">{item.label}</span>
+							<span class="link-underline"></span>
+							{isActive(item) && <span class="active-dot"></span>}
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
+
+		<div class="nav-right">
+			<a href={switchPath} class="lang-switch" aria-label={t(lang, 'lang.switchTo')} hreflang={otherLang}>
+				<span class:list={['lang-option', { active: lang === 'es' }]}>ES</span>
+				<span class="lang-divider">/</span>
+				<span class:list={['lang-option', { active: lang === 'en' }]}>EN</span>
+			</a>
+
+			<button
+				class="hamburger"
+				id="hamburger-btn"
+				type="button"
+				aria-label={t(lang, 'nav.openMenu')}
+				aria-expanded="false"
+				data-label-open={t(lang, 'nav.openMenu')}
+				data-label-close={t(lang, 'nav.closeMenu')}
+			>
+			<span class="hamburger-line line-1"></span>
+			<span class="hamburger-line line-2"></span>
+			<span class="hamburger-line line-3"></span>
+			</button>
+		</div>
+	</div>
+	<div class="nav-backdrop"></div>
+</nav>
+
+<!-- Mobile overlay lives OUTSIDE nav to avoid stacking context issues -->
+<div class="mobile-overlay" id="mobile-menu">
+	<div class="mobile-overlay-backdrop" id="mobile-backdrop"></div>
+	<div class="mobile-menu-content">
+		<div class="mobile-menu-inner">
+			<ul class="mobile-nav-links">
+				{navItems.map((item, index) => (
+					<li class="mobile-nav-item" style={`--mobile-index: ${index}`}>
+						<a
+							href={item.href}
+							class:list={['mobile-nav-link', { active: isActive(item) }]}
+							aria-current={isActive(item) ? 'page' : undefined}
+							tabindex="-1"
+						>
+							<span class="mobile-link-number">{String(index + 1).padStart(2, '0')}</span>
+							<span class="mobile-link-text">{item.label}</span>
+							{isActive(item) && <span class="mobile-active-indicator"></span>}
+							<span class="mobile-link-arrow">
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+							</span>
+						</a>
+					</li>
+				))}
+			</ul>
+			<a href={switchPath} class="mobile-lang-switch" hreflang={otherLang}>
+				<span class:list={['mobile-lang-option', { active: lang === 'es' }]}>ES</span>
+				<span class="mobile-lang-divider">|</span>
+				<span class:list={['mobile-lang-option', { active: lang === 'en' }]}>EN</span>
+			</a>
+			<div class="mobile-menu-footer">
+				<span class="mobile-footer-text">{t(lang, 'nav.mobileFooter')}</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+  async function initNavigation() {
+    try {
+      // @ts-ignore
+      const { gsap } = await import("gsap");
+      // @ts-ignore
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if ((window as any).__GSAP_DISABLE_ANIMATIONS__) return;
+
+      const nav = document.getElementById("main-nav");
+      const logo = nav?.querySelector(".logo");
+      const navPill = nav?.querySelector(".nav-pill");
+      const navItems = nav?.querySelectorAll(".nav-item");
+      const navBackdrop = nav?.querySelector(".nav-backdrop");
+      const hamburger = document.getElementById("hamburger-btn");
+      const mobileOverlay = document.getElementById("mobile-menu");
+      const mobileBackdrop = document.getElementById("mobile-backdrop");
+      const mobileLinks = mobileOverlay?.querySelectorAll(".mobile-nav-link");
+      const mobileItems = mobileOverlay?.querySelectorAll(".mobile-nav-item");
+
+      let isMenuOpen = false;
+      let savedScrollY = 0;
+
+      // ===== ENTRANCE =====
+      if (!prefersReducedMotion) {
+        if (logo) {
+          gsap.fromTo(logo,
+            { opacity: 0, y: -20 },
+            { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }
+          );
+        }
+        if (navPill) {
+          gsap.fromTo(navPill,
+            { opacity: 0, y: -10, scale: 0.95 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out", delay: 0.2 }
+          );
+        }
+        if (hamburger) {
+          gsap.fromTo(hamburger,
+            { opacity: 0, scale: 0.8 },
+            { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)", delay: 0.3 }
+          );
+        }
+      }
+
+      // ===== SCROLL EFFECT =====
+      if (nav && navBackdrop) {
+        let ticking = false;
+        const updateNav = () => {
+          if (isMenuOpen) { ticking = false; return; }
+          const scrollY = window.scrollY;
+          if (scrollY > 80) {
+            gsap.to(nav, { backgroundColor: "rgba(10, 10, 10, 0.95)", backdropFilter: "blur(20px)", duration: 0.3 });
+            gsap.to(navBackdrop, { opacity: 1, duration: 0.3 });
+          } else {
+            gsap.to(nav, { backgroundColor: "rgba(10, 10, 10, 0.8)", backdropFilter: "blur(10px)", duration: 0.3 });
+            gsap.to(navBackdrop, { opacity: 0, duration: 0.3 });
+          }
+          ticking = false;
+        };
+        window.addEventListener("scroll", () => {
+          if (!ticking) { window.requestAnimationFrame(updateNav); ticking = true; }
+        }, { passive: true });
+      }
+
+      // ===== DESKTOP HOVER =====
+      if (!prefersReducedMotion) {
+        navItems?.forEach((item) => {
+          const link = item.querySelector(".nav-link");
+          const underline = item.querySelector(".link-underline");
+          if (link && underline) {
+            link.addEventListener("mouseenter", () => {
+              gsap.to(underline, { scaleX: 1, duration: 0.4, ease: "power2.out" });
+              gsap.to(link, { color: "#ffffff", duration: 0.3 });
+            });
+            link.addEventListener("mouseleave", () => {
+              const active = link.classList.contains("active");
+              gsap.to(underline, { scaleX: 0, duration: 0.4, ease: "power2.out" });
+              if (!active) gsap.to(link, { color: "", duration: 0.3 });
+            });
+          }
+        });
+      }
+
+      // ===== LOGO HOVER =====
+      if (logo && !prefersReducedMotion) {
+        const logoGlow = logo.querySelector(".logo-glow");
+        logo.addEventListener("mouseenter", () => {
+          gsap.to(logoGlow, { opacity: 1, scale: 1.2, duration: 0.4 });
+          gsap.to(logo, { scale: 1.05, duration: 0.3 });
+        });
+        logo.addEventListener("mouseleave", () => {
+          gsap.to(logoGlow, { opacity: 0, scale: 1, duration: 0.4 });
+          gsap.to(logo, { scale: 1, duration: 0.3 });
+        });
+      }
+
+      // ===== MOBILE MENU =====
+      function openMenu() {
+        if (!hamburger || !mobileOverlay) return;
+        isMenuOpen = true;
+        savedScrollY = window.scrollY;
+
+        // Toggle hamburger
+        hamburger.classList.add("open");
+        hamburger.setAttribute("aria-expanded", "true");
+        hamburger.setAttribute("aria-label", hamburger.dataset.labelClose || "Close menu");
+
+        // Lock scroll (iOS compatible)
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+        document.body.style.touchAction = "none";
+
+        // Enable tabbing
+        mobileLinks?.forEach(l => l.setAttribute("tabindex", "0"));
+
+        // Show overlay: first make it display:flex, then animate in next frame
+        mobileOverlay.style.display = "flex";
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            mobileOverlay.classList.add("is-open");
+
+            // GSAP entrance
+            if (!prefersReducedMotion && mobileItems) {
+              gsap.fromTo(mobileItems,
+                { opacity: 0, x: -20 },
+                { opacity: 1, x: 0, duration: 0.4, stagger: 0.06, ease: "power3.out", delay: 0.05 }
+              );
+            }
+          });
+        });
+
+        // Focus first link
+        setTimeout(() => {
+          (mobileOverlay?.querySelector(".mobile-nav-link") as HTMLElement)?.focus();
+        }, prefersReducedMotion ? 10 : 300);
+      }
+
+      function closeMenu() {
+        if (!hamburger || !mobileOverlay) return;
+        isMenuOpen = false;
+
+        hamburger.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", "false");
+        hamburger.setAttribute("aria-label", hamburger.dataset.labelOpen || "Open menu");
+
+        mobileOverlay.classList.remove("is-open");
+        mobileLinks?.forEach(l => l.setAttribute("tabindex", "-1"));
+
+        // Unlock scroll
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+        document.body.style.touchAction = "";
+        window.scrollTo(0, savedScrollY);
+
+        // Hide after transition
+        setTimeout(() => {
+          if (!isMenuOpen) mobileOverlay.style.display = "none";
+        }, 350);
+
+        hamburger.focus();
+      }
+
+      // Hamburger click
+      hamburger?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        isMenuOpen ? closeMenu() : openMenu();
+      });
+
+      // Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && isMenuOpen) closeMenu();
+      });
+
+      // Link click closes menu
+      mobileLinks?.forEach(link => {
+        link.addEventListener("click", () => closeMenu());
+      });
+
+      // Backdrop click closes menu
+      mobileBackdrop?.addEventListener("click", closeMenu);
+
+      // Focus trap
+      document.addEventListener("keydown", (e) => {
+        if (!isMenuOpen || e.key !== "Tab") return;
+        const els = [hamburger, ...(mobileLinks ? Array.from(mobileLinks) : [])].filter(Boolean) as HTMLElement[];
+        const first = els[0];
+        const last = els[els.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+      });
+
+      // Close on resize to desktop
+      window.matchMedia("(min-width: 769px)").addEventListener("change", (e) => {
+        if (e.matches && isMenuOpen) closeMenu();
+      });
+
+      // ===== SMOOTH SCROLL =====
+      const allLinks = [
+        ...Array.from(nav?.querySelectorAll(".nav-link") || []),
+        ...Array.from(mobileOverlay?.querySelectorAll(".mobile-nav-link") || []),
+      ];
+      allLinks.forEach((link) => {
+        link.addEventListener("click", async (e) => {
+          const href = (link as HTMLAnchorElement).getAttribute("href");
+          if (!href) return;
+          const hashMatch = href.match(/^(?:\/(?:en)?)?#(.+)$/);
+          if (hashMatch) {
+            const target = document.getElementById(hashMatch[1]);
+            if (target) {
+              e.preventDefault();
+              if (isMenuOpen) closeMenu();
+              // Small delay to let menu close
+              setTimeout(async () => {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                try {
+                  // @ts-ignore
+                  const { ScrollToPlugin } = await import("gsap/ScrollToPlugin");
+                  gsap.registerPlugin(ScrollToPlugin);
+                  gsap.to(window, { duration: 1.2, scrollTo: { y: target, offsetY: 80 }, ease: "power2.inOut" });
+                } catch { /* fallback handled above */ }
+              }, isMenuOpen ? 400 : 0);
+            }
+          }
+        });
+      });
+    } catch (error) {
+      console.warn("Navigation init error:", error);
+    }
+  }
+
+  if (typeof window !== "undefined") {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initNavigation);
+    } else {
+      initNavigation();
+    }
+  }
+</script>
+
+<style is:global>
+	/* ===== NAV BASE ===== */
+	#main-nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1000;
+		background-color: rgba(10, 10, 10, 0.8);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+	}
+
+	#main-nav .nav-backdrop {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(180deg, rgba(59, 130, 246, 0.08) 0%, transparent 100%);
+		opacity: 0;
+		pointer-events: none;
+		z-index: -1;
+	}
+
+	#main-nav .nav-container {
+		max-width: 1400px;
+		margin: 0 auto;
+		padding: 1.1rem 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		position: relative;
+		z-index: 1;
+	}
+
+	/* ===== LOGO ===== */
+	#main-nav .logo {
+		position: relative;
+		font-size: 1.5rem;
+		font-weight: 800;
+		color: #e8e8e8;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		will-change: transform;
+		letter-spacing: 0.05em;
+		z-index: 1002;
+	}
+
+	#main-nav .logo-text {
+		position: relative;
+		z-index: 1;
+		background: linear-gradient(135deg, #ffffff 0%, #3b82f6 50%, #06b6d4 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	#main-nav .logo-glow {
+		position: absolute;
+		inset: -12px;
+		background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+		filter: blur(15px);
+		opacity: 0;
+		z-index: 0;
+	}
+
+	/* ===== NAV PILL ===== */
+	#main-nav .nav-pill {
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		border-radius: 100px;
+		padding: 0.3rem 0.4rem;
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+	}
+
+	#main-nav .nav-links {
+		display: flex;
+		gap: 0.15rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	#main-nav .nav-item {
+		position: relative;
+	}
+
+	#main-nav .nav-link {
+		position: relative;
+		color: #a0a0a0;
+		font-size: 0.85rem;
+		font-weight: 500;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		padding: 0.45rem 0.9rem;
+		border-radius: 100px;
+		transition: color 0.3s ease, background-color 0.3s ease;
+	}
+
+	#main-nav .link-text {
+		position: relative;
+		z-index: 1;
+	}
+
+	#main-nav .link-underline {
+		position: absolute;
+		bottom: 4px;
+		left: 50%;
+		transform: translateX(-50%) scaleX(0);
+		width: 55%;
+		height: 2px;
+		background: linear-gradient(90deg, #3b82f6 0%, #06b6d4 100%);
+		transform-origin: center;
+		border-radius: 2px;
+		box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+	}
+
+	#main-nav .nav-link:hover {
+		color: #ffffff;
+		background-color: rgba(255, 255, 255, 0.04);
+	}
+
+	/* ===== ACTIVE STATE ===== */
+	#main-nav .nav-link.active {
+		color: #ffffff;
+	}
+
+	#main-nav .active-dot {
+		position: absolute;
+		bottom: 2px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 4px;
+		height: 4px;
+		background: #3b82f6;
+		border-radius: 50%;
+		box-shadow: 0 0 8px rgba(59, 130, 246, 0.8), 0 0 16px rgba(59, 130, 246, 0.4);
+		animation: navActivePulse 2s ease-in-out infinite;
+	}
+
+	@keyframes navActivePulse {
+		0%, 100% { box-shadow: 0 0 4px rgba(59, 130, 246, 0.8), 0 0 10px rgba(59, 130, 246, 0.4); }
+		50% { box-shadow: 0 0 8px rgba(59, 130, 246, 1), 0 0 20px rgba(59, 130, 246, 0.5); }
+	}
+
+	/* ===== HAMBURGER ===== */
+	#main-nav .hamburger {
+		display: none;
+		position: relative;
+		width: 28px;
+		height: 20px;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 0;
+		z-index: 1002;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	#main-nav .hamburger-line {
+		position: absolute;
+		left: 0;
+		width: 100%;
+		height: 2px;
+		background: #e8e8e8;
+		border-radius: 2px;
+		transition: all 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+		transform-origin: center;
+	}
+
+	#main-nav .line-1 { top: 0; }
+	#main-nav .line-2 { top: 50%; transform: translateY(-50%); }
+	#main-nav .line-3 { bottom: 0; }
+
+	#main-nav .hamburger.open .line-1 {
+		top: 50%;
+		transform: translateY(-50%) rotate(45deg);
+		background: #3b82f6;
+	}
+	#main-nav .hamburger.open .line-2 {
+		opacity: 0;
+		transform: translateY(-50%) scaleX(0);
+	}
+	#main-nav .hamburger.open .line-3 {
+		bottom: auto;
+		top: 50%;
+		transform: translateY(-50%) rotate(-45deg);
+		background: #3b82f6;
+	}
+
+	/* ===== MOBILE OVERLAY (global, outside nav) ===== */
+	.mobile-overlay {
+		display: none;
+		position: fixed;
+		inset: 0;
+		z-index: 1001;
+		flex-direction: column;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	.mobile-overlay.is-open {
+		opacity: 1;
+	}
+
+	.mobile-overlay-backdrop {
+		position: absolute;
+		inset: 0;
+		background: rgba(5, 5, 10, 0.85);
+		backdrop-filter: blur(30px);
+		-webkit-backdrop-filter: blur(30px);
+	}
+
+	.mobile-menu-content {
+		position: relative;
+		z-index: 1;
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 6rem 1.5rem 2rem;
+	}
+
+	.mobile-menu-inner {
+		width: 100%;
+		max-width: 320px;
+	}
+
+	.mobile-nav-links {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.mobile-nav-item {
+		width: 100%;
+	}
+
+	.mobile-nav-link {
+		display: flex;
+		align-items: center;
+		gap: 0.85rem;
+		width: 100%;
+		padding: 1rem 1.25rem;
+		color: #a0a0a0;
+		font-size: 1.15rem;
+		font-weight: 600;
+		text-decoration: none;
+		border-radius: 14px;
+		border: 1px solid transparent;
+		transition: all 0.25s ease;
+		position: relative;
+	}
+
+	.mobile-nav-link:hover,
+	.mobile-nav-link:focus-visible {
+		color: #ffffff;
+		background: rgba(59, 130, 246, 0.06);
+		border-color: rgba(59, 130, 246, 0.1);
+	}
+
+	.mobile-link-number {
+		font-size: 0.65rem;
+		font-weight: 700;
+		font-family: "JetBrains Mono", "Fira Code", monospace;
+		color: rgba(255, 255, 255, 0.15);
+		letter-spacing: 0.05em;
+		min-width: 1.4rem;
+		flex-shrink: 0;
+	}
+
+	.mobile-link-text {
+		flex: 1;
+	}
+
+	.mobile-link-arrow {
+		color: rgba(255, 255, 255, 0.1);
+		flex-shrink: 0;
+		transition: all 0.25s ease;
+	}
+
+	.mobile-nav-link:hover .mobile-link-arrow,
+	.mobile-nav-link:focus-visible .mobile-link-arrow {
+		color: rgba(59, 130, 246, 0.5);
+		transform: translateX(3px);
+	}
+
+	/* Active mobile link */
+	.mobile-nav-link.active {
+		color: #ffffff;
+		background: rgba(59, 130, 246, 0.08);
+		border-color: rgba(59, 130, 246, 0.12);
+	}
+
+	.mobile-nav-link.active .mobile-link-number {
+		color: rgba(59, 130, 246, 0.6);
+	}
+
+	.mobile-nav-link.active .mobile-link-arrow {
+		color: rgba(59, 130, 246, 0.4);
+	}
+
+	.mobile-active-indicator {
+		width: 5px;
+		height: 5px;
+		background: #3b82f6;
+		border-radius: 50%;
+		box-shadow: 0 0 8px rgba(59, 130, 246, 0.7);
+		flex-shrink: 0;
+	}
+
+	/* Footer */
+	.mobile-menu-footer {
+		margin-top: 2.5rem;
+		padding-top: 1.5rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.05);
+		text-align: center;
+	}
+
+	.mobile-footer-text {
+		font-size: 0.7rem;
+		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.12);
+		font-family: "JetBrains Mono", "Fira Code", monospace;
+	}
+
+	/* ===== NAV RIGHT ===== */
+	#main-nav .nav-right {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		z-index: 1002;
+	}
+
+	/* ===== LANGUAGE SWITCHER (desktop) ===== */
+	#main-nav .lang-switch {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		padding: 0.3rem 0.6rem;
+		border-radius: 100px;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		text-decoration: none;
+		font-size: 0.7rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		font-family: "JetBrains Mono", "Fira Code", monospace;
+		transition: all 0.3s ease;
+	}
+
+	#main-nav .lang-switch:hover {
+		border-color: rgba(59, 130, 246, 0.2);
+		background: rgba(255, 255, 255, 0.05);
+	}
+
+	#main-nav .lang-option {
+		color: rgba(255, 255, 255, 0.3);
+		transition: color 0.3s ease;
+	}
+
+	#main-nav .lang-option.active {
+		color: #3b82f6;
+	}
+
+	#main-nav .lang-divider {
+		color: rgba(255, 255, 255, 0.1);
+	}
+
+	/* ===== LANGUAGE SWITCHER (mobile) ===== */
+	.mobile-lang-switch {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		margin-top: 2rem;
+		padding: 0.6rem 1.25rem;
+		border-radius: 100px;
+		background: rgba(255, 255, 255, 0.03);
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		text-decoration: none;
+		font-size: 0.8rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		font-family: "JetBrains Mono", "Fira Code", monospace;
+		transition: all 0.3s ease;
+	}
+
+	.mobile-lang-switch:hover {
+		border-color: rgba(59, 130, 246, 0.2);
+		background: rgba(255, 255, 255, 0.05);
+	}
+
+	.mobile-lang-option {
+		color: rgba(255, 255, 255, 0.3);
+		transition: color 0.3s ease;
+	}
+
+	.mobile-lang-option.active {
+		color: #3b82f6;
+	}
+
+	.mobile-lang-divider {
+		color: rgba(255, 255, 255, 0.1);
+	}
+
+	/* ===== FOCUS ===== */
+	#main-nav .nav-link:focus-visible,
+	.mobile-nav-link:focus-visible {
+		outline: 2px solid rgba(59, 130, 246, 0.5);
+		outline-offset: 2px;
+	}
+
+	#main-nav .hamburger:focus-visible {
+		outline: 2px solid rgba(59, 130, 246, 0.5);
+		outline-offset: 4px;
+		border-radius: 4px;
+	}
+
+	/* ===== RESPONSIVE ===== */
+	@media (max-width: 768px) {
+		#main-nav .nav-container {
+			padding: 1rem 1.5rem;
+		}
+		#main-nav .nav-pill {
+			display: none;
+		}
+		#main-nav .lang-switch {
+			display: none;
+		}
+		#main-nav .hamburger {
+			display: block;
+		}
+	}
+
+	@media (min-width: 769px) {
+		.mobile-overlay {
+			display: none !important;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		#main-nav .hamburger-line { transition: none; }
+		.mobile-overlay { transition: none; }
+		#main-nav .active-dot { animation: none; box-shadow: 0 0 6px rgba(59, 130, 246, 0.6); }
+	}
+</style>

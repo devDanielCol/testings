@@ -1,0 +1,645 @@
+---
+import type { Lang } from '../../i18n';
+import { useTranslations, getLocalizedPath } from '../../i18n';
+import { podcastT } from '../../i18n/pages/podcast';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(podcastT);
+
+const platforms = [
+  {
+    name: "Apple Podcasts",
+    url: "https://podcasts.apple.com/ve/podcast/programa-tu-mente/id1726852176",
+    color: "#fc3c44",
+    colorRgb: "252, 60, 68",
+  },
+  {
+    name: "Spotify",
+    url: "https://open.spotify.com/show/4GVA8cd1scFfPQ1F5lAbrF",
+    color: "#1db954",
+    colorRgb: "29, 185, 84",
+  },
+  {
+    name: "YouTube",
+    url: "#",
+    color: "#ff0000",
+    colorRgb: "255, 0, 0",
+  },
+];
+
+const topics = [
+  { icon: "ai", title: t(lang, 'topics.0.title'), description: t(lang, 'topics.0.description') },
+  { icon: "quantum", title: t(lang, 'topics.1.title'), description: t(lang, 'topics.1.description') },
+  { icon: "code", title: t(lang, 'topics.2.title'), description: t(lang, 'topics.2.description') },
+  { icon: "future", title: t(lang, 'topics.3.title'), description: t(lang, 'topics.3.description') },
+];
+
+const stats = [
+  { value: t(lang, 'stats.0.value'), label: t(lang, 'stats.0.label') },
+  { value: t(lang, 'stats.1.value'), label: t(lang, 'stats.1.label') },
+  { value: t(lang, 'stats.2.value'), label: t(lang, 'stats.2.label') },
+];
+
+const homePath = getLocalizedPath('/', lang);
+const blogPath = getLocalizedPath('/blog', lang);
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "PodcastSeries",
+  "name": "Programa Tu Mente",
+  "description": t(lang, 'meta.description'),
+  "url": "https://danielfcramos.dev/programa-tu-mente-podcast",
+  "author": {
+    "@type": "Person",
+    "name": "Daniel Cubillos",
+    "url": "https://danielfcramos.dev",
+  },
+  "inLanguage": "es",
+  "genre": ["Technology", "Education", "Science"],
+  "webFeed": "https://podcasts.apple.com/ve/podcast/programa-tu-mente/id1726852176",
+  "sameAs": [
+    "https://podcasts.apple.com/ve/podcast/programa-tu-mente/id1726852176",
+    "https://open.spotify.com/show/4GVA8cd1scFfPQ1F5lAbrF",
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock",
+  },
+});
+---
+
+<script type="application/ld+json" is:inline set:html={structuredData} />
+
+<main id="podcast-page">
+  <div class="podcast-bg-effects">
+    <div class="podcast-orb orb-1"></div>
+    <div class="podcast-orb orb-2"></div>
+    <div class="podcast-orb orb-3"></div>
+    <div class="grid-lines"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <!-- HERO -->
+  <section class="podcast-hero">
+    <div class="container">
+      <div class="hero-label">
+        <span class="label-dot"></span>
+        <span class="label-text">{t(lang, 'hero.label')}</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="title-line">
+          <span class="title-word">{t(lang, 'hero.title.word1')}</span>
+          <span class="title-word">{t(lang, 'hero.title.word2')}</span>
+          <span class="title-word accent">{t(lang, 'hero.title.word3')}</span>
+        </span>
+      </h1>
+      <p class="hero-tagline">
+        <span class="bracket">&lt;</span>
+        {t(lang, 'hero.tagline')}
+        <span class="bracket">/&gt;</span>
+      </p>
+
+      <div class="hero-stats">
+        {stats.map((stat) => (
+          <div class="stat-item">
+            <span class="stat-value">{stat.value}</span>
+            <span class="stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+
+      <div class="platform-buttons">
+        {platforms.map((platform) => (
+          <a
+            href={platform.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="platform-btn"
+            style={`--platform-color: ${platform.color}; --platform-rgb: ${platform.colorRgb}`}
+          >
+            {platform.name === "Apple Podcasts" && (
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M12 2C6.477 2 2 6.477 2 12c0 3.94 2.28 7.34 5.59 8.97a.75.75 0 0 0 .66-1.35C5.54 18.24 3.5 15.36 3.5 12 3.5 7.306 7.306 3.5 12 3.5S20.5 7.306 20.5 12c0 3.36-2.04 6.24-4.75 7.62a.75.75 0 0 0 .66 1.35C19.72 19.34 22 15.94 22 12c0-5.523-4.477-10-10-10zm0 4a6 6 0 0 0-6 6c0 2.21 1.2 4.14 2.98 5.18a.75.75 0 0 0 .74-1.3A4.5 4.5 0 0 1 7.5 12 4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 4.5 4.5c0 1.57-.8 2.95-2.22 3.88a.75.75 0 0 0 .74 1.3A6 6 0 0 0 18 12a6 6 0 0 0-6-6zm0 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-.75 6.25a.75.75 0 0 0-.75.75v2.5a1.5 1.5 0 0 0 3 0V17a.75.75 0 0 0-.75-.75h-.75z" />
+              </svg>
+            )}
+            {platform.name === "Spotify" && (
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 0 1 .207.857zm1.224-2.719a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 1 1-.453-1.494c3.628-1.102 8.135-.568 11.233 1.33a.78.78 0 0 1 .257 1.073zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.935.935 0 1 1-.543-1.79c3.533-1.073 9.404-.866 13.115 1.338a.935.935 0 0 1-1.054 1.612z" />
+              </svg>
+            )}
+            {platform.name === "YouTube" && (
+              <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+            )}
+            <span>{platform.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PLAYER -->
+  <section class="podcast-player">
+    <div class="container">
+      <div class="player-card">
+        <div class="player-content">
+          <div class="player-header">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="22" height="22">
+              <path d="M9 18V5l12-2v13" />
+              <circle cx="6" cy="18" r="3" />
+              <circle cx="18" cy="16" r="3" />
+            </svg>
+            <h2 class="player-title">{t(lang, 'player.title')}</h2>
+          </div>
+          <div class="player-wrapper">
+            <iframe
+              height="450"
+              width="100%"
+              title="Programa Tu Mente - Apple Podcasts Player"
+              src="https://embed.podcasts.apple.com/us/podcast/programa-tu-mente/id1726852176?itscg=30200&itsct=podcast_box_player&ls=1&mttnsubad=1726852176&theme=dark"
+              id="embedPlayer"
+              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation-by-user-activation"
+              allow="autoplay *; encrypted-media *; clipboard-write"
+              style="border: 0px; border-radius: 12px; width: 100%; height: 450px;"
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><div class="divider-line"></div></div>
+
+  <!-- ABOUT -->
+  <section class="podcast-about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <div class="section-label">
+            <span class="label-dot-sm"></span>
+            <span>{t(lang, 'about.label')}</span>
+          </div>
+          <h2 class="about-title">{t(lang, 'about.title')}</h2>
+          <p class="about-text" set:html={t(lang, 'about.text1')} />
+          <p class="about-text" set:html={t(lang, 'about.text2')} />
+          <p class="about-text about-highlight">
+            {t(lang, 'about.highlight')}
+          </p>
+          <a
+            href="https://www.amazon.com/Programa-tu-mente/dp/B0CSJRHPKV"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="book-link"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+            <span>{t(lang, 'about.bookLink')}</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+        </div>
+        <div class="about-visual">
+          <div class="visualizer-card">
+            <div class="audio-visualizer">
+              <div class="viz-bar" style="--bar-h: 40%; --bar-delay: 0s;"></div>
+              <div class="viz-bar" style="--bar-h: 70%; --bar-delay: 0.15s;"></div>
+              <div class="viz-bar" style="--bar-h: 55%; --bar-delay: 0.3s;"></div>
+              <div class="viz-bar" style="--bar-h: 85%; --bar-delay: 0.45s;"></div>
+              <div class="viz-bar" style="--bar-h: 45%; --bar-delay: 0.6s;"></div>
+              <div class="viz-bar" style="--bar-h: 75%; --bar-delay: 0.75s;"></div>
+              <div class="viz-bar" style="--bar-h: 60%; --bar-delay: 0.9s;"></div>
+              <div class="viz-bar" style="--bar-h: 50%; --bar-delay: 1.05s;"></div>
+              <div class="viz-bar" style="--bar-h: 80%; --bar-delay: 1.2s;"></div>
+              <div class="viz-bar" style="--bar-h: 35%; --bar-delay: 1.35s;"></div>
+              <div class="viz-bar" style="--bar-h: 65%; --bar-delay: 1.5s;"></div>
+              <div class="viz-bar" style="--bar-h: 90%; --bar-delay: 1.65s;"></div>
+            </div>
+            <div class="visualizer-label">
+              <span class="viz-dot"></span>
+              <span>{t(lang, 'about.visualizerLabel')}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><div class="divider-line"></div></div>
+
+  <!-- TOPICS -->
+  <section class="podcast-topics">
+    <div class="container">
+      <div class="section-label centered">
+        <span class="label-dot-sm"></span>
+        <span>{t(lang, 'topics.label')}</span>
+      </div>
+      <h2 class="topics-title">{t(lang, 'topics.title')}</h2>
+      <div class="topics-grid">
+        {topics.map((topic) => (
+          <div class="topic-card">
+            <div class="topic-icon">
+              {topic.icon === "ai" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z" />
+                  <path d="M8 14s-4 0-4 4v2h16v-2c0-4-4-4-4-4" />
+                  <circle cx="9" cy="9" r="0.5" fill="currentColor" />
+                  <circle cx="15" cy="9" r="0.5" fill="currentColor" />
+                  <path d="M7 3L5 1M17 3l2-2M12 1v1" />
+                </svg>
+              )}
+              {topic.icon === "quantum" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="2" />
+                  <ellipse cx="12" cy="12" rx="10" ry="4" />
+                  <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)" />
+                  <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)" />
+                </svg>
+              )}
+              {topic.icon === "code" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <polyline points="16 18 22 12 16 6" />
+                  <polyline points="8 6 2 12 8 18" />
+                  <line x1="14" y1="4" x2="10" y2="20" />
+                </svg>
+              )}
+              {topic.icon === "future" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+              )}
+            </div>
+            <h3 class="topic-name">{topic.title}</h3>
+            <p class="topic-desc">{topic.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><div class="divider-line"></div></div>
+
+  <!-- HOST -->
+  <section class="podcast-host">
+    <div class="container">
+      <div class="host-card">
+        <div class="host-content">
+          <div class="section-label">
+            <span class="label-dot-sm"></span>
+            <span>{t(lang, 'host.label')}</span>
+          </div>
+          <h2 class="host-name">{t(lang, 'host.name')}</h2>
+          <p class="host-bio">{t(lang, 'host.bio')}</p>
+          <div class="host-links">
+            <a href={homePath} class="host-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+              <span>{t(lang, 'host.link.portfolio')}</span>
+            </a>
+            <a href={blogPath} class="host-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+              </svg>
+              <span>{t(lang, 'host.link.blog')}</span>
+            </a>
+            <a
+              href="https://www.amazon.com/Programa-tu-mente/dp/B0CSJRHPKV"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="host-link"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="16" height="16">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+              </svg>
+              <span>{t(lang, 'host.link.book')}</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="podcast-cta">
+    <div class="container">
+      <div class="cta-card">
+        <div class="cta-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32">
+            <rect x="9" y="2" width="6" height="12" rx="3" />
+            <path d="M5 10a7 7 0 0 0 14 0" />
+            <path d="M12 17v4" />
+            <path d="M8 21h8" />
+          </svg>
+        </div>
+        <h2 class="cta-title">{t(lang, 'cta.title')}</h2>
+        <p class="cta-text">{t(lang, 'cta.text')}</p>
+        <div class="cta-buttons">
+          {platforms.map((platform) => (
+            <a
+              href={platform.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="cta-platform-btn"
+              style={`--platform-color: ${platform.color}; --platform-rgb: ${platform.colorRgb}`}
+            >
+              {platform.name === "Apple Podcasts" && (
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M12 2C6.477 2 2 6.477 2 12c0 3.94 2.28 7.34 5.59 8.97a.75.75 0 0 0 .66-1.35C5.54 18.24 3.5 15.36 3.5 12 3.5 7.306 7.306 3.5 12 3.5S20.5 7.306 20.5 12c0 3.36-2.04 6.24-4.75 7.62a.75.75 0 0 0 .66 1.35C19.72 19.34 22 15.94 22 12c0-5.523-4.477-10-10-10zm0 4a6 6 0 0 0-6 6c0 2.21 1.2 4.14 2.98 5.18a.75.75 0 0 0 .74-1.3A4.5 4.5 0 0 1 7.5 12 4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 4.5 4.5c0 1.57-.8 2.95-2.22 3.88a.75.75 0 0 0 .74 1.3A6 6 0 0 0 18 12a6 6 0 0 0-6-6zm0 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-.75 6.25a.75.75 0 0 0-.75.75v2.5a1.5 1.5 0 0 0 3 0V17a.75.75 0 0 0-.75-.75h-.75z" />
+                </svg>
+              )}
+              {platform.name === "Spotify" && (
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.622.622 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.622.622 0 1 1-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 0 1 .207.857zm1.224-2.719a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 1 1-.453-1.494c3.628-1.102 8.135-.568 11.233 1.33a.78.78 0 0 1 .257 1.073zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.935.935 0 1 1-.543-1.79c3.533-1.073 9.404-.866 13.115 1.338a.935.935 0 0 1-1.054 1.612z" />
+                </svg>
+              )}
+              {platform.name === "YouTube" && (
+                <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+              )}
+              <span>{platform.name}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  async function initPodcastAnimations() {
+    try {
+      // @ts-ignore
+      const { gsap } = await import("gsap");
+      // @ts-ignore
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReducedMotion || (window as any).__GSAP_DISABLE_ANIMATIONS__) return;
+
+      // Hero entrance
+      const titleWords = document.querySelectorAll(".title-word");
+      gsap.set(titleWords, { opacity: 0, y: 60, rotationX: -45 });
+      gsap.to(titleWords, {
+        opacity: 1, y: 0, rotationX: 0, duration: 1,
+        stagger: { amount: 0.4 }, ease: "power3.out", delay: 0.3,
+      });
+
+      gsap.fromTo(".hero-tagline",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, delay: 0.8, ease: "power2.out" }
+      );
+      gsap.fromTo(".hero-stats",
+        { opacity: 0, y: 20, scale: 0.95 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: 1, ease: "back.out(1.5)" }
+      );
+      gsap.fromTo(".platform-buttons",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, delay: 1.2, ease: "power2.out" }
+      );
+
+      // Player section
+      ScrollTrigger.create({
+        trigger: ".podcast-player", start: "top 85%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".player-card",
+            { opacity: 0, y: 60, scale: 0.96 },
+            { opacity: 1, y: 0, scale: 1, duration: 1, ease: "power3.out" }
+          );
+        },
+      });
+
+      // About section
+      ScrollTrigger.create({
+        trigger: ".podcast-about", start: "top 80%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".about-content",
+            { opacity: 0, x: -40 },
+            { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }
+          );
+          gsap.fromTo(".about-visual",
+            { opacity: 0, x: 40 },
+            { opacity: 1, x: 0, duration: 0.8, ease: "power2.out", delay: 0.2 }
+          );
+        },
+      });
+
+      // Topic cards
+      ScrollTrigger.create({
+        trigger: ".podcast-topics", start: "top 80%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".topic-card",
+            { opacity: 0, y: 50, scale: 0.95 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1, ease: "power3.out" }
+          );
+        },
+      });
+
+      // Host section
+      ScrollTrigger.create({
+        trigger: ".podcast-host", start: "top 85%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".host-card",
+            { opacity: 0, y: 50, scale: 0.97 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power2.out" }
+          );
+        },
+      });
+
+      // CTA section
+      ScrollTrigger.create({
+        trigger: ".podcast-cta", start: "top 85%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".cta-card",
+            { opacity: 0, y: 40, scale: 0.97 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" }
+          );
+        },
+      });
+
+      // Floating orb parallax
+      const orbs = document.querySelectorAll(".podcast-orb");
+      orbs.forEach((orb, i) => {
+        gsap.to(orb, {
+          y: `+=${(i + 1) * 30}`, x: `+=${(i % 2 === 0 ? 1 : -1) * 20}`,
+          duration: 12 + i * 2, repeat: -1, yoyo: true, ease: "sine.inOut",
+        });
+      });
+    } catch (error) {
+      console.warn("GSAP not available for podcast page:", error);
+    }
+  }
+
+  if (typeof window !== "undefined") {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initPodcastAnimations);
+    } else {
+      initPodcastAnimations();
+    }
+  }
+</script>
+
+<style>
+  /* ===== PAGE ===== */
+  #podcast-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 8rem 2rem 0;
+    background: #000000;
+    overflow: hidden;
+  }
+
+  /* ===== BACKGROUND ===== */
+  .podcast-bg-effects { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .podcast-orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; }
+  .podcast-orb.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%); top: -200px; left: -200px; }
+  .podcast-orb.orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(59, 130, 246, 0.35) 0%, transparent 70%); top: 40%; right: -150px; }
+  .podcast-orb.orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%); bottom: -150px; left: 30%; }
+  .grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%); }
+  .noise-overlay { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); background-size: 256px; opacity: 0.4; }
+
+  .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ===== SECTION DIVIDERS ===== */
+  .section-divider { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .divider-line { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(139, 92, 246, 0.2) 30%, rgba(59, 130, 246, 0.2) 70%, transparent 100%); }
+
+  /* ===== SHARED LABELS ===== */
+  .hero-label { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.6rem 1.2rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%), rgba(0, 0, 0, 0.3); border: 1px solid rgba(139, 92, 246, 0.3); border-radius: 100px; margin-bottom: 1.5rem; backdrop-filter: blur(10px); }
+  .label-dot { width: 8px; height: 8px; background: #8b5cf6; border-radius: 50%; box-shadow: 0 0 10px rgba(139, 92, 246, 0.8); animation: dotPulse 2s ease-in-out infinite; }
+  @keyframes dotPulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.8), 0 0 10px rgba(139, 92, 246, 0.8); } 50% { opacity: 0.7; box-shadow: 0 0 0 10px rgba(139, 92, 246, 0), 0 0 15px rgba(139, 92, 246, 0.6); } }
+  .label-text { font-size: 0.85rem; font-weight: 600; color: #8b5cf6; letter-spacing: 0.08em; text-transform: uppercase; }
+  .section-label { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #8b5cf6; margin-bottom: 1rem; }
+  .section-label.centered { justify-content: center; width: 100%; }
+  .label-dot-sm { width: 6px; height: 6px; background: #8b5cf6; border-radius: 50%; box-shadow: 0 0 8px rgba(139, 92, 246, 0.6); }
+
+  /* ===== HERO ===== */
+  .podcast-hero { padding: 4rem 0 5rem; text-align: center; }
+  .hero-title { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1.5rem; }
+  .title-line { display: flex; justify-content: center; gap: 0.4em; flex-wrap: wrap; }
+  .title-word { display: inline-block; background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .title-word.accent { background: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-tagline { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: clamp(0.85rem, 2vw, 1.05rem); color: rgba(255, 255, 255, 0.5); max-width: 650px; margin: 0 auto; line-height: 1.7; }
+  .bracket { color: rgba(139, 92, 246, 0.6); font-weight: 300; }
+
+  /* ===== HERO STATS ===== */
+  .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 2.5rem; padding: 1.5rem 2rem; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; max-width: 600px; margin-left: auto; margin-right: auto; backdrop-filter: blur(8px); }
+  .stat-item { display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+  .stat-value { font-size: 1rem; font-weight: 700; color: #e8e8e8; }
+  .stat-label { font-size: 0.72rem; font-weight: 500; color: rgba(255, 255, 255, 0.35); text-transform: uppercase; letter-spacing: 0.06em; font-family: "JetBrains Mono", monospace; }
+
+  /* ===== PLATFORM BUTTONS ===== */
+  .platform-buttons, .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+  .platform-btn, .cta-platform-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.75rem 1.4rem; border-radius: 100px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); color: rgba(255, 255, 255, 0.8); font-weight: 600; font-size: 0.88rem; text-decoration: none; backdrop-filter: blur(10px); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+  .platform-btn:hover, .cta-platform-btn:hover { border-color: var(--platform-color); color: var(--platform-color); background: rgba(var(--platform-rgb), 0.08); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(var(--platform-rgb), 0.15); }
+  .platform-btn svg, .cta-platform-btn svg { flex-shrink: 0; }
+
+  /* ===== PLAYER ===== */
+  .podcast-player { padding: 2rem 0 5rem; }
+  .player-card { position: relative; border-radius: 24px; overflow: hidden; }
+  .player-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(255, 255, 255, 0.05) 50%, rgba(59, 130, 246, 0.3) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  .player-content { padding: 2.5rem; background: linear-gradient(135deg, rgba(15, 15, 20, 0.9) 0%, rgba(10, 10, 15, 0.95) 100%); border-radius: 24px; backdrop-filter: blur(20px); }
+  .player-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; color: #8b5cf6; }
+  .player-title { font-size: 1.4rem; font-weight: 700; color: #e8e8e8; }
+  .player-wrapper { display: flex; justify-content: center; }
+  .player-wrapper iframe { max-width: 100%; }
+
+  /* ===== ABOUT ===== */
+  .podcast-about { padding: 5rem 0; }
+  .about-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 4rem; align-items: center; }
+  .about-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 1.5rem; background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .about-text { font-size: 1rem; line-height: 1.8; color: rgba(255, 255, 255, 0.55); margin-bottom: 1.25rem; }
+  .about-text :global(strong) { color: rgba(255, 255, 255, 0.85); }
+  .about-highlight { color: #8b5cf6; font-weight: 600; font-family: "JetBrains Mono", monospace; font-size: 0.9rem; padding: 0.6rem 1rem; background: rgba(139, 92, 246, 0.06); border-left: 2px solid rgba(139, 92, 246, 0.4); border-radius: 0 8px 8px 0; }
+  .book-link { display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1rem; padding: 0.75rem 1.25rem; background: rgba(139, 92, 246, 0.08); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 12px; color: #8b5cf6; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+  .book-link:hover { background: rgba(139, 92, 246, 0.15); border-color: rgba(139, 92, 246, 0.4); transform: translateY(-2px); color: #a78bfa; box-shadow: 0 4px 20px rgba(139, 92, 246, 0.1); }
+
+  /* Audio Visualizer */
+  .visualizer-card { position: relative; background: linear-gradient(135deg, rgba(15, 15, 20, 0.9) 0%, rgba(10, 10, 15, 0.95) 100%); border-radius: 24px; padding: 3rem 2rem 2rem; backdrop-filter: blur(20px); display: flex; flex-direction: column; align-items: center; gap: 1.5rem; overflow: hidden; }
+  .visualizer-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.25) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(59, 130, 246, 0.25) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  .audio-visualizer { display: flex; align-items: flex-end; gap: 6px; height: 140px; }
+  .viz-bar { width: 8px; height: var(--bar-h); background: linear-gradient(to top, #8b5cf6, #3b82f6); border-radius: 4px; transform-origin: bottom; animation: vizPulse 1.5s ease-in-out infinite; animation-delay: var(--bar-delay); }
+  @keyframes vizPulse { 0%, 100% { transform: scaleY(1); opacity: 0.8; } 50% { transform: scaleY(0.3); opacity: 0.35; } }
+  .visualizer-label { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); }
+  .viz-dot { width: 6px; height: 6px; background: #22c55e; border-radius: 50%; animation: vizDotPulse 1.5s ease-in-out infinite; box-shadow: 0 0 8px rgba(34, 197, 94, 0.6); }
+  @keyframes vizDotPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  /* ===== TOPICS ===== */
+  .podcast-topics { padding: 5rem 0; }
+  .topics-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; text-align: center; margin-bottom: 3rem; background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .topics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  .topic-card { position: relative; padding: 2rem; background: linear-gradient(135deg, rgba(15, 15, 20, 0.9) 0%, rgba(10, 10, 15, 0.95) 100%); border-radius: 24px; backdrop-filter: blur(20px); transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); overflow: hidden; }
+  .topic-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: all 0.4s ease; }
+  .topic-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(139, 92, 246, 0.08); }
+  .topic-card:hover::before { background: linear-gradient(135deg, rgba(139, 92, 246, 0.4) 0%, transparent 50%, rgba(59, 130, 246, 0.4) 100%); }
+  .topic-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: rgba(139, 92, 246, 0.1); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 14px; margin-bottom: 1.25rem; color: #8b5cf6; transition: all 0.3s ease; }
+  .topic-icon svg { width: 24px; height: 24px; }
+  .topic-card:hover .topic-icon { background: rgba(139, 92, 246, 0.2); border-color: rgba(139, 92, 246, 0.4); box-shadow: 0 0 20px rgba(139, 92, 246, 0.15); transform: scale(1.05); }
+  .topic-name { font-size: 1.1rem; font-weight: 700; color: #e8e8e8; margin-bottom: 0.6rem; }
+  .topic-desc { font-size: 0.88rem; line-height: 1.65; color: rgba(255, 255, 255, 0.45); }
+
+  /* ===== HOST ===== */
+  .podcast-host { padding: 5rem 0; }
+  .host-card { position: relative; overflow: hidden; border-radius: 24px; }
+  .host-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.25) 0%, rgba(255, 255, 255, 0.03) 50%, rgba(59, 130, 246, 0.25) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  .host-content { padding: 3rem; background: linear-gradient(135deg, rgba(15, 15, 20, 0.9) 0%, rgba(10, 10, 15, 0.95) 100%); border-radius: 24px; backdrop-filter: blur(20px); }
+  .host-name { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; margin-bottom: 1.25rem; background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .host-bio { font-size: 1rem; line-height: 1.8; color: rgba(255, 255, 255, 0.55); max-width: 700px; margin-bottom: 2rem; }
+  .host-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+  .host-link { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.6rem 1.2rem; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 100px; color: rgba(255, 255, 255, 0.6); font-size: 0.82rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+  .host-link:hover { border-color: rgba(139, 92, 246, 0.4); color: #8b5cf6; background: rgba(139, 92, 246, 0.08); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(139, 92, 246, 0.1); }
+
+  /* ===== CTA ===== */
+  .podcast-cta { padding: 3rem 0 8rem; text-align: center; }
+  .cta-card { position: relative; padding: 4rem 2rem; border-radius: 24px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.08) 0%, rgba(59, 130, 246, 0.05) 100%); backdrop-filter: blur(10px); overflow: hidden; }
+  .cta-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(139, 92, 246, 0.4) 0%, rgba(59, 130, 246, 0.15) 50%, rgba(139, 92, 246, 0.4) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  .cta-icon { display: flex; justify-content: center; margin-bottom: 1.5rem; color: #8b5cf6; }
+  .cta-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .cta-text { font-size: 1rem; color: rgba(255, 255, 255, 0.5); margin-bottom: 0.5rem; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    #podcast-page { padding: 7rem 1.5rem 0; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-visual { order: -1; }
+    .topics-grid { grid-template-columns: 1fr; }
+    .player-content { padding: 1.5rem; }
+    .host-content { padding: 2rem; }
+    .cta-card { padding: 3rem 1.5rem; }
+    .platform-buttons, .cta-buttons { flex-direction: column; align-items: center; }
+    .platform-btn, .cta-platform-btn { width: 100%; max-width: 280px; justify-content: center; }
+    .hero-stats { gap: 1.5rem; padding: 1.25rem 1rem; }
+    .stat-value { font-size: 0.9rem; }
+    .stat-label { font-size: 0.65rem; }
+    .section-divider { padding: 0 1.5rem; }
+    .audio-visualizer { height: 100px; }
+    .viz-bar { width: 6px; gap: 4px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-stats { flex-direction: column; gap: 1rem; }
+    .stat-item { flex-direction: row; gap: 0.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .viz-bar { animation: none; }
+    .label-dot, .viz-dot { animation: none; }
+  }
+</style>

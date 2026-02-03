@@ -1,0 +1,41 @@
+---
+export const prerender = false;
+
+import Layout from "../../../layouts/Layout.astro";
+import Navigation from "../../../components/astro/Navigation.astro";
+import Footer from "../../../components/astro/Footer.astro";
+import BlogIndexContent from "../../../components/astro/BlogIndexContent.astro";
+import { useTranslations } from "../../../i18n";
+import { blogT } from "../../../i18n/pages/blog";
+import { getPosts, getAllLabels } from "../../../lib/blogger";
+
+const t = useTranslations(blogT);
+
+let posts: any[] = [];
+let labels: string[] = [];
+let nextPageToken: string | undefined;
+let error: string | null = null;
+
+try {
+  const [postsResponse, labelsResponse] = await Promise.all([
+    getPosts({ maxResults: 9, orderBy: "published" }),
+    getAllLabels(),
+  ]);
+  posts = postsResponse.items || [];
+  nextPageToken = postsResponse.nextPageToken;
+  labels = labelsResponse;
+} catch (e) {
+  error = e instanceof Error ? e.message : "Failed to load blog posts";
+}
+---
+
+<Layout
+  lang="en"
+  title={t('en', 'index.title')}
+  description={t('en', 'index.description')}
+  keywords={t('en', 'index.keywords')}
+>
+  <Navigation lang="en" />
+  <BlogIndexContent lang="en" posts={posts} labels={labels} nextPageToken={nextPageToken} error={error} />
+  <Footer lang="en" />
+</Layout>

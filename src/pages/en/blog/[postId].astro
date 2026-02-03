@@ -1,0 +1,44 @@
+---
+export const prerender = false;
+
+import Layout from "../../../layouts/Layout.astro";
+import Navigation from "../../../components/astro/Navigation.astro";
+import Footer from "../../../components/astro/Footer.astro";
+import BlogPostContent from "../../../components/astro/BlogPostContent.astro";
+import { getPost, getComments, getExcerpt, getFirstImage, getReadingTime } from "../../../lib/blogger";
+
+const { postId } = Astro.params;
+
+if (!postId) {
+  return Astro.redirect("/en/blog");
+}
+
+let post: any = null;
+let comments: any[] = [];
+let commentsPageToken: string | undefined;
+let error: string | null = null;
+
+try {
+  const [postData, commentsData] = await Promise.all([
+    getPost(postId),
+    getComments(postId, { maxResults: 10 }),
+  ]);
+  post = postData;
+  comments = commentsData.items || [];
+  commentsPageToken = commentsData.nextPageToken;
+} catch (e) {
+  error = e instanceof Error ? e.message : "Failed to load post";
+}
+
+const title = post ? `${post.title} | Blog` : "Post Not Found | Blog";
+const description = post ? getExcerpt(post.content, 160) : "";
+const image = post ? getFirstImage(post) : null;
+const readingTime = post ? getReadingTime(post.content) : 0;
+const googleClientId = import.meta.env.PUBLIC_GOOGLE_CLIENT_ID || "";
+---
+
+<Layout lang="en" title={title} description={description} image={image || undefined}>
+  <Navigation lang="en" />
+  <BlogPostContent lang="en" post={post} postId={postId} comments={comments} commentsPageToken={commentsPageToken} error={error} image={image} readingTime={readingTime} googleClientId={googleClientId} />
+  <Footer lang="en" />
+</Layout>

@@ -1,0 +1,220 @@
+---
+import type { Lang } from '../i18n';
+import { getLocalizedPath } from '../i18n';
+
+interface Props {
+  title: string;
+  lang?: Lang;
+  description?: string;
+  keywords?: string;
+  author?: string;
+  url?: string;
+  image?: string;
+  twitterCard?: string;
+  twitterSite?: string;
+  twitterCreator?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  canonical?: string;
+}
+
+const {
+  title,
+  lang = 'es',
+  description,
+  keywords,
+  author,
+  url,
+  image,
+  twitterCard,
+  twitterSite,
+  twitterCreator,
+  twitterTitle,
+  twitterDescription,
+  canonical,
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+const esPath = getLocalizedPath(currentPath, 'es');
+const enPath = getLocalizedPath(currentPath, 'en');
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content={author} />
+    <meta name="url" content={url} />
+    <meta name="image" content={image} />
+    <meta name="twitter:card" content={twitterCard} />
+    <meta name="twitter:site" content={twitterSite} />
+    <meta name="twitter:creator" content={twitterCreator} />
+    <meta name="twitter:title" content={twitterTitle} />
+    <meta name="twitter:description" content={twitterDescription} />
+    <meta name="canonical" content={canonical} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <!-- Hreflang -->
+    <link rel="alternate" hreflang="es" href={esPath} />
+    <link rel="alternate" hreflang="en" href={enPath} />
+    <link rel="alternate" hreflang="x-default" href={esPath} />
+
+    <!-- Performance optimizations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <meta name="theme-color" content="#0a0a0a" />
+  </head>
+  <body>
+    <slot />
+
+    <!-- Global Performance Optimizations -->
+    <script is:inline>
+      // Performance optimizations
+      (function () {
+        // Lazy load images
+        if ("IntersectionObserver" in window) {
+          const imageObserver = new IntersectionObserver(
+            (entries, observer) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const img = entry.target;
+                  if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.removeAttribute("data-src");
+                    observer.unobserve(img);
+                  }
+                }
+              });
+            },
+            { rootMargin: "50px" },
+          );
+
+          document.querySelectorAll("img[data-src]").forEach((img) => {
+            imageObserver.observe(img);
+          });
+        }
+
+        // Reduce motion for users who prefer it
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.style.setProperty(
+            "--animation-duration",
+            "0.01s",
+          );
+          // Disable GSAP animations
+          window.__GSAP_DISABLE_ANIMATIONS__ = true;
+        }
+
+        // Optimize scroll performance with passive listeners
+        let lastScrollY = 0;
+        let ticking = false;
+
+        function onScroll() {
+          lastScrollY = window.scrollY;
+          if (!ticking) {
+            window.requestAnimationFrame(() => {
+              // Scroll handling here
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+
+        // Debounce resize events
+        let resizeTimer;
+        window.addEventListener(
+          "resize",
+          () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = window.setTimeout(() => {
+              // Trigger ScrollTrigger refresh if available
+              if (window.ScrollTrigger) {
+                window.ScrollTrigger.refresh();
+              }
+            }, 250);
+          },
+          { passive: true },
+        );
+
+        // Optimize GSAP if available
+        if (typeof window !== "undefined") {
+          window.addEventListener("load", () => {
+            setTimeout(() => {
+              if (window.ScrollTrigger) {
+                window.ScrollTrigger.refresh();
+              }
+            }, 100);
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --color-bg: #0a0a0a;
+    --color-text: #e8e8e8;
+    --color-text-muted: #a0a0a0;
+    --color-accent: #3b82f6;
+    --color-accent-hover: #60a5fa;
+    --color-border: #222222;
+    --spacing-unit: 1rem;
+    --max-width: 800px;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+      Cantarell, sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 16px;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  a:hover {
+    color: var(--color-accent-hover);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+  }
+</style>

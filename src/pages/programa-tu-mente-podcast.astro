@@ -1,0 +1,25 @@
+---
+export const prerender = true;
+
+import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/astro/Navigation.astro";
+import Footer from "../components/astro/Footer.astro";
+import PodcastContent from "../components/astro/PodcastContent.astro";
+import { useTranslations } from "../i18n";
+import { podcastT } from "../i18n/pages/podcast";
+
+const t = useTranslations(podcastT);
+---
+
+<Layout
+  lang="es"
+  title={t('es', 'meta.title')}
+  description={t('es', 'meta.description')}
+  keywords={t('es', 'meta.keywords')}
+  author="Daniel Cubillos"
+  canonical="https://danielfcramos.dev/programa-tu-mente-podcast"
+>
+  <Navigation lang="es" />
+  <PodcastContent lang="es" />
+  <Footer lang="es" />
+</Layout>

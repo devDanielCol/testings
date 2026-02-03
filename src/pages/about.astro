@@ -1,0 +1,25 @@
+---
+export const prerender = true;
+
+import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/astro/Navigation.astro";
+import Footer from "../components/astro/Footer.astro";
+import AboutContent from "../components/astro/AboutContent.astro";
+import { useTranslations } from "../i18n";
+import { aboutT } from "../i18n/pages/about";
+
+const t = useTranslations(aboutT);
+---
+
+<Layout
+  lang="es"
+  title={t('es', 'title')}
+  description={t('es', 'description')}
+  keywords="Daniel Cubillos, ingeniero de software, sobre mí, desarrollador, IA, machine learning, podcaster, creador de contenido"
+  author="Daniel Cubillos"
+  canonical="https://danielfcramos.dev/about"
+>
+  <Navigation lang="es" />
+  <AboutContent lang="es" />
+  <Footer lang="es" />
+</Layout>

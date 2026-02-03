@@ -1,0 +1,44 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Hero from "../../components/astro/Hero.astro";
+import Projects from "../../components/astro/Projects.astro";
+import Footer from "../../components/astro/Footer.astro";
+import { useTranslations } from "../../i18n";
+import { homeT } from "../../i18n/pages/home";
+
+const t = useTranslations(homeT);
+
+const url = "https://danielfcramos.dev/en";
+const image = "https://danielfcramos.dev/images/danielfcramos.dev-logo.png";
+const canonical = "https://danielfcramos.dev/en";
+---
+
+<Layout
+  lang="en"
+  title={t('en', 'meta.title')}
+  description={t('en', 'meta.description')}
+  keywords={t('en', 'meta.keywords')}
+  author="Daniel Cubillos"
+  url={url}
+  image={image}
+  twitterCard="summary_large_image"
+  twitterSite="@dan_cubillos"
+  twitterCreator="@dan_cubillos"
+  twitterTitle="danielfcramos.dev"
+  twitterDescription={t('en', 'meta.twitterDescription')}
+  canonical={canonical}
+>
+  <Navigation lang="en" />
+  <main>
+    <Hero client:load />
+    <Projects lang="en" client:idle />
+  </main>
+  <Footer lang="en" />
+</Layout>
+
+<style>
+  main {
+    padding-top: 80px;
+  }
+</style>

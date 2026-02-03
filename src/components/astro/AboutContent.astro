@@ -1,0 +1,678 @@
+---
+import type { Lang } from '../../i18n';
+import { useTranslations, getLocalizedPath } from '../../i18n';
+import { aboutT } from '../../i18n/pages/about';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(aboutT);
+
+const works = [
+  {
+    type: t(lang, 'work1Type'),
+    title: t(lang, 'work1Title'),
+    description: t(lang, 'work1Desc'),
+    tags: ["Python", "TensorFlow", "GPT", "Computer Vision"],
+    accentColor: "#8b5cf6",
+    accentRgb: "139, 92, 246",
+  },
+  {
+    type: t(lang, 'work2Type'),
+    title: t(lang, 'work2Title'),
+    description: t(lang, 'work2Desc'),
+    tags: ["Podcast", "Storytelling", "Education", "Spanish"],
+    accentColor: "#06b6d4",
+    accentRgb: "6, 182, 212",
+  },
+  {
+    type: t(lang, 'work3Type'),
+    title: t(lang, 'work3Title'),
+    description: t(lang, 'work3Desc'),
+    tags: ["React", "Astro", "Node.js", "TypeScript"],
+    accentColor: "#3b82f6",
+    accentRgb: "59, 130, 246",
+  },
+  {
+    type: t(lang, 'work4Type'),
+    title: t(lang, 'work4Title'),
+    description: t(lang, 'work4Desc'),
+    tags: ["GitHub", "Open Source", "Code Review", "Documentation"],
+    accentColor: "#22c55e",
+    accentRgb: "34, 197, 94",
+  },
+  {
+    type: t(lang, 'work5Type'),
+    title: t(lang, 'work5Title'),
+    description: t(lang, 'work5Desc'),
+    tags: ["PyTorch", "LLMs", "Hugging Face", "NLP"],
+    accentColor: "#f59e0b",
+    accentRgb: "245, 158, 11",
+  },
+  {
+    type: t(lang, 'work6Type'),
+    title: t(lang, 'work6Title'),
+    description: t(lang, 'work6Desc'),
+    tags: ["Docker", "AWS", "GCP", "CI/CD"],
+    accentColor: "#06b6d4",
+    accentRgb: "6, 182, 212",
+  },
+];
+
+const skillCategories = [
+  {
+    icon: "code",
+    title: t(lang, 'skillCat1'),
+    skills: ["Python", "JavaScript", "TypeScript", "SQL", "HTML/CSS"],
+  },
+  {
+    icon: "ai",
+    title: t(lang, 'skillCat2'),
+    skills: ["TensorFlow", "PyTorch", "LLMs", "GPT", "Computer Vision", "NLP"],
+  },
+  {
+    icon: "frontend",
+    title: t(lang, 'skillCat3'),
+    skills: ["React", "Astro", "Next.js", "Tailwind CSS", "GSAP"],
+  },
+  {
+    icon: "backend",
+    title: t(lang, 'skillCat4'),
+    skills: ["Node.js", "REST APIs", "Docker", "AWS", "GCP", "PostgreSQL"],
+  },
+];
+
+const hobbies = [
+  {
+    icon: "music",
+    title: t(lang, 'hobby1Title'),
+    description: t(lang, 'hobby1Desc'),
+  },
+  {
+    icon: "reading",
+    title: t(lang, 'hobby2Title'),
+    description: t(lang, 'hobby2Desc'),
+  },
+  {
+    icon: "sports",
+    title: t(lang, 'hobby3Title'),
+    description: t(lang, 'hobby3Desc'),
+  },
+];
+
+const socials = [
+  { name: "Instagram", handle: "@your_handle", url: "https://instagram.com/", color: "#E4405F", colorRgb: "228, 64, 95" },
+  { name: "LinkedIn", handle: "/in/your-profile", url: "https://linkedin.com/in/", color: "#0A66C2", colorRgb: "10, 102, 194" },
+  { name: "GitHub", handle: "@yourusername", url: "https://github.com/", color: "#ffffff", colorRgb: "255, 255, 255" },
+  { name: "TikTok", handle: "@your_handle", url: "https://tiktok.com/", color: "#00f2ea", colorRgb: "0, 242, 234" },
+  { name: "Hugging Face", handle: "@your_handle", url: "https://huggingface.co/", color: "#FFD21E", colorRgb: "255, 210, 30" },
+  { name: "Facebook", handle: "Your Name", url: "https://facebook.com/", color: "#1877F2", colorRgb: "24, 119, 242" },
+];
+
+const quickFacts = [
+  { label: t(lang, 'factLocationLabel'), value: t(lang, 'factLocationValue') },
+  { label: t(lang, 'factLanguagesLabel'), value: t(lang, 'factLanguagesValue') },
+  { label: t(lang, 'factFocusLabel'), value: t(lang, 'factFocusValue') },
+  { label: t(lang, 'factPodcastLabel'), value: t(lang, 'factPodcastValue') },
+];
+
+const podcastPath = getLocalizedPath('/programa-tu-mente-podcast', lang);
+const blogPath = getLocalizedPath('/blog', lang);
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Daniel Cubillos",
+  "url": "https://danielfcramos.dev",
+  "jobTitle": "Software Engineer",
+  "knowsAbout": ["Artificial Intelligence", "Software Development", "Python", "JavaScript", "Machine Learning"],
+  "sameAs": [
+    "https://instagram.com/",
+    "https://linkedin.com/in/",
+    "https://github.com/",
+    "https://tiktok.com/",
+  ],
+});
+---
+
+<script type="application/ld+json" is:inline set:html={structuredData} />
+
+<main id="about-page">
+  <div class="about-bg-effects">
+    <div class="about-orb orb-1"></div>
+    <div class="about-orb orb-2"></div>
+    <div class="about-orb orb-3"></div>
+    <div class="grid-lines"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <!-- HERO -->
+  <section class="about-hero">
+    <div class="container">
+      <div class="hero-label">
+        <span class="label-dot"></span>
+        <span class="label-text">{t(lang, 'heroLabel')}</span>
+      </div>
+      <h1 class="hero-name">
+        <span class="name-word">Daniel</span>
+        <span class="name-word accent">Cubillos</span>
+      </h1>
+      <p class="hero-role">{t(lang, 'heroRole')}</p>
+      <p class="hero-oneliner">
+        <span class="bracket">&lt;</span>
+        {t(lang, 'heroOneliner')}
+        <span class="bracket">/&gt;</span>
+      </p>
+      <div class="hero-indicators">
+        <div class="indicator">
+          <span class="indicator-dot active"></span>
+          <span>{t(lang, 'indicatorAvailable')}</span>
+        </div>
+        <div class="indicator">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>{t(lang, 'indicatorLocation')}</span>
+        </div>
+        <div class="indicator">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="14" height="14"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>{t(lang, 'indicatorFocus')}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIO -->
+  <section class="about-bio">
+    <div class="container">
+      <div class="bio-grid">
+        <div class="bio-text">
+          <div class="slabel">
+            <span class="slabel-dot"></span>
+            <span>{t(lang, 'bioLabel')}</span>
+          </div>
+          <h2 class="section-title" set:html={t(lang, 'bioTitle').replace(/\n/g, '<br/>')} />
+          <p class="bio-paragraph">{t(lang, 'bioParagraph1')}</p>
+          <p class="bio-paragraph">{t(lang, 'bioParagraph2')}</p>
+          <p class="bio-paragraph">{t(lang, 'bioParagraph3')}</p>
+        </div>
+        <div class="bio-facts">
+          <div class="facts-card">
+            {quickFacts.map((fact) => (
+              <div class="fact-row">
+                <span class="fact-label">{fact.label}</span>
+                <span class="fact-value">{fact.value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><div class="divider-line"></div></div>
+
+  <!-- PROJECTS & WORK -->
+  <section class="about-works">
+    <div class="container">
+      <div class="slabel centered">
+        <span class="slabel-dot"></span>
+        <span>{t(lang, 'worksLabel')}</span>
+      </div>
+      <h2 class="section-title centered">{t(lang, 'worksTitle')}</h2>
+      <div class="works-grid">
+        {works.map((work, index) => (
+          <div class="work-card" style={`--work-accent: ${work.accentColor}; --work-rgb: ${work.accentRgb}`}>
+            <span class="work-number">{String(index + 1).padStart(2, '0')}</span>
+            <div class="work-badge">{work.type}</div>
+            <h3 class="work-title">{work.title}</h3>
+            <p class="work-desc">{work.description}</p>
+            <div class="work-tags">
+              {work.tags.map((tag) => (
+                <span class="work-tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><div class="divider-line"></div></div>
+
+  <!-- SKILLS -->
+  <section class="about-skills">
+    <div class="container">
+      <div class="slabel centered">
+        <span class="slabel-dot"></span>
+        <span>{t(lang, 'skillsLabel')}</span>
+      </div>
+      <h2 class="section-title centered">{t(lang, 'skillsTitle')}</h2>
+      <div class="skills-grid">
+        {skillCategories.map((cat) => (
+          <div class="skill-card">
+            <div class="skill-icon">
+              {cat.icon === "code" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+              )}
+              {cat.icon === "ai" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M8 14s-4 0-4 4v2h16v-2c0-4-4-4-4-4"/><path d="M7 3L5 1M17 3l2-2M12 1v1"/></svg>
+              )}
+              {cat.icon === "frontend" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              )}
+              {cat.icon === "backend" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+              )}
+            </div>
+            <h3 class="skill-title">{cat.title}</h3>
+            <div class="skill-chips">
+              {cat.skills.map((skill) => (
+                <span class="chip">{skill}</span>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><div class="divider-line"></div></div>
+
+  <!-- HOBBIES -->
+  <section class="about-hobbies">
+    <div class="container">
+      <div class="slabel centered">
+        <span class="slabel-dot"></span>
+        <span>{t(lang, 'hobbiesLabel')}</span>
+      </div>
+      <h2 class="section-title centered">{t(lang, 'hobbiesTitle')}</h2>
+      <div class="hobbies-grid">
+        {hobbies.map((hobby) => (
+          <div class="hobby-card">
+            <div class="hobby-icon">
+              {hobby.icon === "music" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+              )}
+              {hobby.icon === "reading" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              )}
+              {hobby.icon === "sports" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8a6 6 0 0 0-6-6 6 6 0 0 0-6 6c0 7 6 13 6 13s6-6 6-13z"/><circle cx="12" cy="8" r="2"/><path d="M9 22h6"/></svg>
+              )}
+            </div>
+            <h3 class="hobby-name">{hobby.title}</h3>
+            <p class="hobby-desc">{hobby.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"><div class="divider-line"></div></div>
+
+  <!-- SOCIALS -->
+  <section class="about-socials">
+    <div class="container">
+      <div class="slabel centered">
+        <span class="slabel-dot"></span>
+        <span>{t(lang, 'socialsLabel')}</span>
+      </div>
+      <h2 class="section-title centered">{t(lang, 'socialsTitle')}</h2>
+      <div class="socials-grid">
+        {socials.map((social) => (
+          <a
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-card"
+            style={`--social-color: ${social.color}; --social-rgb: ${social.colorRgb}`}
+          >
+            <div class="social-icon">
+              {social.name === "Instagram" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+              )}
+              {social.name === "LinkedIn" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              )}
+              {social.name === "GitHub" && (
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+              )}
+              {social.name === "TikTok" && (
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1 0-5.78c.27 0 .54.04.8.1v-3.5a6.37 6.37 0 0 0-.8-.05A6.34 6.34 0 0 0 3.15 15a6.34 6.34 0 0 0 10.86 4.49V12.8a8.2 8.2 0 0 0 4.77 1.52h.81V10.9a4.84 4.84 0 0 1-1-.21v3.44z"/></svg>
+              )}
+              {social.name === "Hugging Face" && (
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><circle cx="9" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="9" r="1" fill="currentColor" stroke="none"/></svg>
+              )}
+              {social.name === "Facebook" && (
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              )}
+            </div>
+            <div class="social-info">
+              <span class="social-name">{social.name}</span>
+              <span class="social-handle">{social.handle}</span>
+            </div>
+            <svg class="social-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="about-cta">
+    <div class="container">
+      <div class="cta-card">
+        <h2 class="cta-title">{t(lang, 'ctaTitle')}</h2>
+        <p class="cta-text">{t(lang, 'ctaText')}</p>
+        <div class="cta-actions">
+          <a href="mailto:your@email.com" class="cta-email-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="18" height="18"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span>{t(lang, 'ctaEmailBtn')}</span>
+          </a>
+          <div class="cta-links">
+            <a href={podcastPath} class="cta-link">{t(lang, 'ctaPodcast')}</a>
+            <a href={blogPath} class="cta-link">{t(lang, 'ctaBlog')}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  async function initAboutAnimations() {
+    try {
+      // @ts-ignore
+      const { gsap } = await import("gsap");
+      // @ts-ignore
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+      gsap.registerPlugin(ScrollTrigger);
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReducedMotion || (window as any).__GSAP_DISABLE_ANIMATIONS__) return;
+
+      // Hero
+      gsap.fromTo(".hero-label",
+        { opacity: 0, y: 20, scale: 0.9 },
+        { opacity: 1, y: 0, scale: 1, duration: 0.6, delay: 0.2, ease: "back.out(1.5)" }
+      );
+      const nameWords = document.querySelectorAll(".name-word");
+      gsap.set(nameWords, { opacity: 0, y: 50 });
+      gsap.to(nameWords, { opacity: 1, y: 0, duration: 0.8, stagger: 0.15, ease: "power3.out", delay: 0.4 });
+      gsap.fromTo(".hero-role",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, delay: 0.8, ease: "power2.out" }
+      );
+      gsap.fromTo(".hero-oneliner",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, delay: 1, ease: "power2.out" }
+      );
+      gsap.fromTo(".hero-indicators",
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, delay: 1.2, ease: "power2.out" }
+      );
+
+      // Bio
+      ScrollTrigger.create({
+        trigger: ".about-bio", start: "top 80%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".bio-text",
+            { opacity: 0, x: -40 },
+            { opacity: 1, x: 0, duration: 0.8, ease: "power2.out" }
+          );
+          gsap.fromTo(".bio-facts",
+            { opacity: 0, x: 40 },
+            { opacity: 1, x: 0, duration: 0.8, ease: "power2.out", delay: 0.15 }
+          );
+        },
+      });
+
+      // Works / Projects
+      ScrollTrigger.create({
+        trigger: ".about-works", start: "top 80%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".work-card",
+            { opacity: 0, y: 50, scale: 0.95 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.1, ease: "power3.out" }
+          );
+        },
+      });
+
+      // Skills
+      ScrollTrigger.create({
+        trigger: ".about-skills", start: "top 80%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".skill-card",
+            { opacity: 0, y: 40, scale: 0.95 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.1, ease: "back.out(1.2)" }
+          );
+        },
+      });
+
+      // Hobbies
+      ScrollTrigger.create({
+        trigger: ".about-hobbies", start: "top 80%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".hobby-card",
+            { opacity: 0, y: 40, scale: 0.95, rotation: -1 },
+            { opacity: 1, y: 0, scale: 1, rotation: 0, duration: 0.7, stagger: 0.12, ease: "power3.out" }
+          );
+        },
+      });
+
+      // Socials
+      ScrollTrigger.create({
+        trigger: ".about-socials", start: "top 80%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".social-card",
+            { opacity: 0, y: 30, x: -10 },
+            { opacity: 1, y: 0, x: 0, duration: 0.5, stagger: 0.06, ease: "power3.out" }
+          );
+        },
+      });
+
+      // CTA
+      ScrollTrigger.create({
+        trigger: ".about-cta", start: "top 85%", once: true,
+        onEnter: () => {
+          gsap.fromTo(".cta-card",
+            { opacity: 0, y: 40, scale: 0.97 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: "power3.out" }
+          );
+        },
+      });
+
+      // Orb parallax
+      document.querySelectorAll(".about-orb").forEach((orb, i) => {
+        gsap.to(orb, {
+          y: `+=${(i + 1) * 25}`, x: `+=${(i % 2 === 0 ? 1 : -1) * 15}`,
+          duration: 14 + i * 2, repeat: -1, yoyo: true, ease: "sine.inOut",
+        });
+      });
+    } catch (error) {
+      console.warn("GSAP not available for about page:", error);
+    }
+  }
+
+  if (typeof window !== "undefined") {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initAboutAnimations);
+    } else {
+      initAboutAnimations();
+    }
+  }
+</script>
+
+<style>
+  #about-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 8rem 2rem 0;
+    background: #000000;
+    overflow: hidden;
+  }
+
+  /* ===== BG ===== */
+  .about-bg-effects { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+  .about-orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; }
+  .about-orb.orb-1 { width: 600px; height: 600px; background: radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%); top: -200px; right: -200px; }
+  .about-orb.orb-2 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(6,182,212,0.3) 0%, transparent 70%); top: 50%; left: -200px; }
+  .about-orb.orb-3 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(34,197,94,0.2) 0%, transparent 70%); bottom: -100px; right: 10%; }
+  .grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px); background-size: 60px 60px; mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%); -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%); }
+  .noise-overlay { position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); background-size: 256px; opacity: 0.4; }
+
+  .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ===== DIVIDERS ===== */
+  .section-divider { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+  .divider-line { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(59,130,246,0.2) 30%, rgba(6,182,212,0.2) 70%, transparent 100%); }
+
+  /* ===== SHARED ===== */
+  .hero-label { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.6rem 1.2rem; background: linear-gradient(135deg, rgba(59,130,246,0.15) 0%, rgba(6,182,212,0.1) 100%), rgba(0,0,0,0.3); border: 1px solid rgba(59,130,246,0.3); border-radius: 100px; margin-bottom: 1.5rem; backdrop-filter: blur(10px); }
+  .label-dot { width: 8px; height: 8px; background: #3b82f6; border-radius: 50%; box-shadow: 0 0 10px rgba(59,130,246,0.8); animation: dotPulse 2s ease-in-out infinite; }
+  @keyframes dotPulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(59,130,246,0.8), 0 0 10px rgba(59,130,246,0.8); } 50% { box-shadow: 0 0 0 10px rgba(59,130,246,0), 0 0 15px rgba(59,130,246,0.6); } }
+  .label-text { font-size: 0.85rem; font-weight: 600; color: #3b82f6; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .slabel { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #3b82f6; margin-bottom: 1rem; }
+  .slabel.centered { justify-content: center; width: 100%; }
+  .slabel-dot { width: 6px; height: 6px; background: #3b82f6; border-radius: 50%; box-shadow: 0 0 8px rgba(59,130,246,0.6); }
+
+  .section-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 2.5rem; background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .section-title.centered { text-align: center; }
+
+  .bracket { color: rgba(59,130,246,0.6); font-weight: 300; }
+
+  /* ===== HERO ===== */
+  .about-hero { padding: 4rem 0 5rem; text-align: center; }
+  .hero-name { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 800; line-height: 1.1; margin-bottom: 1rem; display: flex; justify-content: center; gap: 0.35em; flex-wrap: wrap; }
+  .name-word { display: inline-block; background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .name-word.accent { background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-role { font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 600; color: rgba(255,255,255,0.5); margin-bottom: 1rem; }
+  .hero-oneliner { font-family: "JetBrains Mono", "Fira Code", monospace; font-size: clamp(0.82rem, 1.8vw, 0.95rem); color: rgba(255,255,255,0.4); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+  .hero-indicators { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+  .indicator { display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+  .indicator svg { color: rgba(255,255,255,0.3); }
+  .indicator-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .indicator-dot.active { background: #22c55e; box-shadow: 0 0 8px rgba(34,197,94,0.6); animation: dotPulse2 2s ease-in-out infinite; }
+  @keyframes dotPulse2 { 0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); } 50% { box-shadow: 0 0 0 6px rgba(34,197,94,0); } }
+
+  /* ===== BIO ===== */
+  .about-bio { padding: 5rem 0; }
+  .bio-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 3rem; align-items: start; }
+  .bio-paragraph { font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.55); margin-bottom: 1.25rem; }
+  .bio-paragraph strong { color: rgba(255,255,255,0.85); }
+
+  .facts-card { position: relative; padding: 2rem; background: linear-gradient(135deg, rgba(15,15,20,0.9) 0%, rgba(10,10,15,0.95) 100%); border-radius: 24px; backdrop-filter: blur(20px); overflow: hidden; }
+  .facts-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(59,130,246,0.3) 0%, rgba(255,255,255,0.04) 50%, rgba(6,182,212,0.3) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  .fact-row { display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .fact-row:last-child { border-bottom: none; }
+  .fact-label { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.35); font-family: "JetBrains Mono", monospace; }
+  .fact-value { font-size: 0.88rem; font-weight: 600; color: #e8e8e8; }
+
+  /* ===== PROJECTS & WORK ===== */
+  .about-works { padding: 5rem 0; }
+  .works-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+
+  .work-card { position: relative; padding: 2rem; background: linear-gradient(135deg, rgba(15,15,20,0.9) 0%, rgba(10,10,15,0.95) 100%); border-radius: 24px; backdrop-filter: blur(20px); overflow: hidden; transition: all 0.4s cubic-bezier(0.23,1,0.32,1); }
+  .work-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: all 0.4s ease; }
+  .work-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 25px rgba(var(--work-rgb), 0.08); }
+  .work-card:hover::before { background: linear-gradient(135deg, rgba(var(--work-rgb), 0.4) 0%, transparent 50%, rgba(var(--work-rgb), 0.2) 100%); }
+
+  .work-number { position: absolute; top: 1.25rem; right: 1.5rem; font-size: 3rem; font-weight: 800; font-family: "JetBrains Mono", monospace; color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; transition: color 0.4s ease; }
+  .work-card:hover .work-number { color: rgba(var(--work-rgb), 0.08); }
+
+  .work-badge { display: inline-block; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 0.3rem 0.75rem; border-radius: 100px; background: rgba(var(--work-rgb), 0.1); border: 1px solid rgba(var(--work-rgb), 0.2); color: var(--work-accent); margin-bottom: 1rem; }
+
+  .work-title { font-size: 1.1rem; font-weight: 700; color: #e8e8e8; margin-bottom: 0.6rem; line-height: 1.3; }
+  .work-desc { font-size: 0.85rem; line-height: 1.7; color: rgba(255,255,255,0.42); margin-bottom: 1.25rem; }
+  .work-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .work-tag { font-size: 0.7rem; font-weight: 600; padding: 0.25rem 0.6rem; border-radius: 100px; background: rgba(var(--work-rgb), 0.06); border: 1px solid rgba(var(--work-rgb), 0.12); color: rgba(255,255,255,0.5); letter-spacing: 0.02em; transition: all 0.2s ease; }
+  .work-card:hover .work-tag { background: rgba(var(--work-rgb), 0.1); border-color: rgba(var(--work-rgb), 0.25); color: rgba(255,255,255,0.7); }
+
+  /* ===== SKILLS ===== */
+  .about-skills { padding: 5rem 0; }
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+
+  .skill-card { position: relative; padding: 2rem; background: linear-gradient(135deg, rgba(15,15,20,0.9) 0%, rgba(10,10,15,0.95) 100%); border-radius: 24px; backdrop-filter: blur(20px); overflow: hidden; transition: all 0.4s cubic-bezier(0.23,1,0.32,1); }
+  .skill-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: all 0.4s ease; }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 20px rgba(59,130,246,0.08); }
+  .skill-card:hover::before { background: linear-gradient(135deg, rgba(59,130,246,0.4) 0%, transparent 50%, rgba(6,182,212,0.4) 100%); }
+
+  .skill-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); border-radius: 12px; margin-bottom: 1rem; color: #3b82f6; transition: all 0.3s ease; }
+  .skill-icon svg { width: 22px; height: 22px; }
+  .skill-card:hover .skill-icon { background: rgba(59,130,246,0.2); border-color: rgba(59,130,246,0.4); box-shadow: 0 0 15px rgba(59,130,246,0.15); transform: scale(1.05); }
+  .skill-title { font-size: 1rem; font-weight: 700; color: #e8e8e8; margin-bottom: 1rem; }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .chip { font-size: 0.72rem; font-weight: 600; padding: 0.3rem 0.7rem; background: rgba(59,130,246,0.08); border: 1px solid rgba(59,130,246,0.15); border-radius: 100px; color: rgba(255,255,255,0.6); letter-spacing: 0.02em; transition: all 0.2s ease; }
+  .chip:hover { background: rgba(59,130,246,0.15); border-color: rgba(59,130,246,0.3); color: #e8e8e8; }
+
+  /* ===== HOBBIES ===== */
+  .about-hobbies { padding: 5rem 0; }
+  .hobbies-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+
+  .hobby-card { position: relative; padding: 2rem; text-align: center; background: linear-gradient(135deg, rgba(15,15,20,0.9) 0%, rgba(10,10,15,0.95) 100%); border-radius: 24px; backdrop-filter: blur(20px); overflow: hidden; transition: all 0.4s cubic-bezier(0.23,1,0.32,1); }
+  .hobby-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: all 0.4s ease; }
+  .hobby-card:hover { transform: translateY(-4px); box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 20px rgba(6,182,212,0.08); }
+  .hobby-card:hover::before { background: linear-gradient(135deg, rgba(6,182,212,0.4) 0%, transparent 50%, rgba(59,130,246,0.4) 100%); }
+
+  .hobby-icon { width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); border-radius: 16px; margin: 0 auto 1.25rem; color: #06b6d4; transition: all 0.3s ease; }
+  .hobby-icon svg { width: 26px; height: 26px; }
+  .hobby-card:hover .hobby-icon { background: rgba(6,182,212,0.2); border-color: rgba(6,182,212,0.4); box-shadow: 0 0 20px rgba(6,182,212,0.15); transform: scale(1.05); }
+  .hobby-name { font-size: 1.05rem; font-weight: 700; color: #e8e8e8; margin-bottom: 0.6rem; }
+  .hobby-desc { font-size: 0.85rem; line-height: 1.6; color: rgba(255,255,255,0.4); }
+
+  /* ===== SOCIALS ===== */
+  .about-socials { padding: 5rem 0; }
+  .socials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+
+  .social-card { position: relative; display: flex; align-items: center; gap: 1rem; padding: 1.25rem 1.5rem; background: linear-gradient(135deg, rgba(15,15,20,0.9) 0%, rgba(10,10,15,0.95) 100%); border-radius: 16px; backdrop-filter: blur(20px); overflow: hidden; text-decoration: none; transition: all 0.4s cubic-bezier(0.23,1,0.32,1); }
+  .social-card::before { content: ""; position: absolute; inset: 0; border-radius: 16px; padding: 1px; background: linear-gradient(135deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: all 0.3s ease; }
+  .social-card:hover { transform: translateY(-3px); box-shadow: 0 6px 25px rgba(0,0,0,0.3), 0 0 15px rgba(var(--social-rgb), 0.1); }
+  .social-card:hover::before { background: linear-gradient(135deg, rgba(var(--social-rgb), 0.4) 0%, transparent 100%); }
+
+  .social-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5); flex-shrink: 0; transition: all 0.3s ease; }
+  .social-icon svg { width: 20px; height: 20px; }
+  .social-card:hover .social-icon { color: var(--social-color); background: rgba(var(--social-rgb), 0.1); }
+  .social-info { flex: 1; min-width: 0; }
+  .social-name { display: block; font-size: 0.88rem; font-weight: 600; color: #e8e8e8; }
+  .social-handle { display: block; font-size: 0.72rem; color: rgba(255,255,255,0.3); font-family: "JetBrains Mono", monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .social-arrow { color: rgba(255,255,255,0.15); flex-shrink: 0; transition: all 0.3s ease; }
+  .social-card:hover .social-arrow { color: var(--social-color); transform: translate(2px, -2px); }
+
+  /* ===== CTA ===== */
+  .about-cta { padding: 3rem 0 8rem; text-align: center; }
+  .cta-card { position: relative; padding: 4rem 2rem; border-radius: 24px; background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(6,182,212,0.05) 100%); backdrop-filter: blur(10px); overflow: hidden; }
+  .cta-card::before { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; background: linear-gradient(135deg, rgba(59,130,246,0.4) 0%, rgba(6,182,212,0.15) 50%, rgba(59,130,246,0.4) 100%); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+  .cta-title { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; background: linear-gradient(135deg, #ffffff 0%, #d0d0d0 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .cta-text { font-size: 1rem; color: rgba(255,255,255,0.5); margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .cta-actions { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+  .cta-email-btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.85rem 2rem; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3); border-radius: 100px; color: #3b82f6; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+  .cta-email-btn:hover { background: rgba(59,130,246,0.25); border-color: rgba(59,130,246,0.5); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(59,130,246,0.15); color: #60a5fa; }
+  .cta-links { display: flex; gap: 1rem; }
+  .cta-link { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.4); text-decoration: none; padding: 0.5rem 1rem; border-radius: 100px; border: 1px solid rgba(255,255,255,0.06); transition: all 0.3s ease; }
+  .cta-link:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.15); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    #about-page { padding: 7rem 1.5rem 0; }
+    .bio-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .works-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .hobbies-grid { grid-template-columns: 1fr; }
+    .socials-grid { grid-template-columns: 1fr; }
+    .hero-indicators { gap: 1rem; }
+    .cta-card { padding: 3rem 1.5rem; }
+    .section-divider { padding: 0 1.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-indicators { flex-direction: column; align-items: center; }
+    .work-card { padding: 1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .label-dot, .indicator-dot.active { animation: none; }
+  }
+</style>

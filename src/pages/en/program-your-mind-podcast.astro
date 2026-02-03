@@ -1,0 +1,25 @@
+---
+export const prerender = true;
+
+import Layout from "../../layouts/Layout.astro";
+import Navigation from "../../components/astro/Navigation.astro";
+import Footer from "../../components/astro/Footer.astro";
+import PodcastContent from "../../components/astro/PodcastContent.astro";
+import { useTranslations } from "../../i18n";
+import { podcastT } from "../../i18n/pages/podcast";
+
+const t = useTranslations(podcastT);
+---
+
+<Layout
+  lang="en"
+  title={t('en', 'meta.title')}
+  description={t('en', 'meta.description')}
+  keywords={t('en', 'meta.keywords')}
+  author="Daniel Cubillos"
+  canonical="https://danielfcramos.dev/en/program-your-mind-podcast"
+>
+  <Navigation lang="en" />
+  <PodcastContent lang="en" />
+  <Footer lang="en" />
+</Layout>

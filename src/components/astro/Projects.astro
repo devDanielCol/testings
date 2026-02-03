@@ -1,0 +1,1878 @@
+---
+import type { Lang } from '../../i18n';
+import { useTranslations, getLocalizedPath } from '../../i18n';
+import { projectsT } from '../../i18n/components/projects';
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = 'es' } = Astro.props;
+const t = useTranslations(projectsT);
+
+const projects = [
+  {
+    title: t(lang, 'project1.title'),
+    description: t(lang, 'project1.desc'),
+    icon: "mic",
+    link: getLocalizedPath('/programa-tu-mente-podcast', lang),
+    color: "purple",
+    stats: { stars: "1.8k", forks: "256" },
+  },
+  {
+    title: t(lang, 'project2.title'),
+    description: t(lang, 'project2.desc'),
+    icon: "opensource",
+    link: getLocalizedPath('/blog', lang),
+    color: "green",
+    stats: { stars: "5.2k", forks: "721" },
+  },
+  {
+    title: t(lang, 'project3.title'),
+    description: t(lang, 'project3.desc'),
+    icon: "research",
+    link: "#research",
+    color: "pink",
+    stats: { stars: "892", forks: "134" },
+  },
+];
+---
+
+<section id="projects">
+  <div class="projects-bg-effects">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+    <div class="grid-lines"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">
+        <span class="label-dot"></span>
+        <span class="label-text">{t(lang, 'label')}</span>
+      </div>
+      <h2 class="section-title">
+        <span class="title-line">
+          <span class="title-word" style="--i: 0">{t(lang, 'title.word1')}</span>
+          <span class="title-word" style="--i: 1">{t(lang, 'title.word2')}</span>
+          <span class="title-word" style="--i: 2">{t(lang, 'title.word3')}</span>
+        </span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="subtitle-bracket">&lt;</span>
+        {t(lang, 'subtitle')}
+        <span class="subtitle-bracket">/&gt;</span>
+      </p>
+    </div>
+
+    <div class="projects-grid">
+      {
+        projects.map((project, index) => (
+          <a
+            href={project.link}
+            class={`project-card ${project.color}`}
+            style={`--card-index: ${index}`}
+          >
+            <div class="card-spotlight" />
+            <div class="card-border" />
+            <div class="card-noise" />
+
+            <div class="card-content">
+              <div class="card-header">
+                <div class="card-icon-wrapper">
+                  <div class="icon-glow" />
+                  <div class="card-icon">
+                    {project.icon === "ai" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" />
+                        <circle cx="12" cy="12" r="4" />
+                      </svg>
+                    )}
+                    {project.icon === "web" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <path d="M3 9h18M9 21V9" />
+                      </svg>
+                    )}
+                    {project.icon === "data" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M3 3v18h18" />
+                        <path d="M7 16l4-4 4 4 5-6" />
+                      </svg>
+                    )}
+                    {project.icon === "opensource" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 3a9 9 0 0 1 0 18" />
+                        <path d="M12 3c-2.5 2.5-4 6-4 9s1.5 6.5 4 9" />
+                        <path d="M3 12h18" />
+                      </svg>
+                    )}
+                    {project.icon === "automation" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M12 2v4" />
+                        <path d="M12 18v4" />
+                        <path d="M4.93 4.93l2.83 2.83" />
+                        <path d="M16.24 16.24l2.83 2.83" />
+                        <path d="M2 12h4" />
+                        <path d="M18 12h4" />
+                        <circle cx="12" cy="12" r="3" />
+                        <path d="M12 9v6" />
+                      </svg>
+                    )}
+                    {project.icon === "mic" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <rect x="9" y="2" width="6" height="12" rx="3" />
+                        <path d="M5 10a7 7 0 0 0 14 0" />
+                        <path d="M12 17v4" />
+                        <path d="M8 21h8" />
+                      </svg>
+                    )}
+                    {project.icon === "research" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                      >
+                        <path d="M9 2h6l3 7H6l3-7z" />
+                        <path d="M12 9v13" />
+                        <path d="M8 22h8" />
+                        <circle cx="12" cy="15" r="2" />
+                      </svg>
+                    )}
+                  </div>
+                </div>
+                <div class="card-badge">
+                  <span class="badge-dot" />
+                  <span class="badge-text">{t(lang, 'badge')}</span>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <h3 class="card-title">
+                  <span class="title-text">{project.title}</span>
+                  <span class="title-underline" />
+                </h3>
+                <p class="card-description">{project.description}</p>
+              </div>
+
+              <div class="card-footer">
+                <div class="card-stats">
+                  <div class="stat">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      width="14"
+                      height="14"
+                    >
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                    <span>{project.stats.stars}</span>
+                  </div>
+                  <div class="stat">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      width="14"
+                      height="14"
+                    >
+                      <path d="M7 5C7 3.89543 7.89543 3 9 3C10.1046 3 11 3.89543 11 5C11 5.74028 10.5978 6.38663 10 6.73244V14.0396H14V11.7324C13.4022 11.3866 13 10.7403 13 10C13 8.89543 13.8954 8 15 8C16.1046 8 17 8.89543 17 10C17 10.7403 16.5978 11.3866 16 11.7324V16.0396H9.5C8.67157 16.0396 8 16.7112 8 17.5396C8 18.3681 8.67157 19.0396 9.5 19.0396H12.2676C12.6134 18.4418 13.2597 18.0396 14 18.0396C15.1046 18.0396 16 18.9351 16 20.0396C16 21.1442 15.1046 22.0396 14 22.0396C13.2597 22.0396 12.6134 21.6374 12.2676 21.0396H9.5C7.567 21.0396 6 19.4726 6 17.5396C6 15.6066 7.567 14.0396 9.5 14.0396H10V6.73244C9.40219 6.38663 9 5.74028 9 5C9 3.89543 7.89543 3 7 5Z" />
+                    </svg>
+                    <span>{project.stats.forks}</span>
+                  </div>
+                </div>
+                <div class="card-action">
+                  <span class="action-text">{t(lang, 'action')}</span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="action-arrow"
+                  >
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-reflection" />
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="section-cta">
+      <a href="#all-projects" class="cta-button">
+        <span class="cta-bg"></span>
+        <span class="cta-text">{t(lang, 'cta')}</span>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          class="cta-icon"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Import GSAP dynamically - using type assertion to avoid TypeScript errors
+  let scrollTriggers: any[] = [];
+  let animationInstances: any[] = [];
+
+  async function initGSAPAnimations() {
+    try {
+      // @ts-ignore - GSAP types may not be available during build
+      const { gsap } = await import("gsap");
+      // @ts-ignore - GSAP types may not be available during build
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+
+      // Register GSAP plugins
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Optimize ScrollTrigger globally
+      ScrollTrigger.config({
+        autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+        ignoreMobileResize: true,
+      });
+
+      // Wait for DOM to be ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+          setupAnimations(gsap, ScrollTrigger);
+        });
+      } else {
+        // Small delay to ensure DOM is fully ready
+        setTimeout(() => {
+          setupAnimations(gsap, ScrollTrigger);
+        }, 100);
+      }
+    } catch (error) {
+      console.warn("GSAP not available:", error);
+    }
+  }
+
+  function setupAnimations(gsap: any, ScrollTrigger: any) {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    if (prefersReducedMotion || (window as any).__GSAP_DISABLE_ANIMATIONS__) {
+      // Skip animations for users who prefer reduced motion
+      return;
+    }
+
+    // Cleanup any existing triggers
+    scrollTriggers.forEach((st) => st?.kill());
+    scrollTriggers = [];
+    animationInstances = [];
+    // Animate section header elements
+    const sectionLabel = document.querySelector(".section-label");
+    const titleWords = document.querySelectorAll(".title-word");
+    const sectionSubtitle = document.querySelector(".section-subtitle");
+    const projectCards = document.querySelectorAll(".project-card");
+    const gradientOrbs = document.querySelectorAll(".gradient-orb");
+    const ctaButton = document.querySelector(".cta-button");
+    const gridLines = document.querySelector(".grid-lines");
+    const noiseOverlay = document.querySelector(".noise-overlay");
+
+    // Remove unused master timeline - we'll use individual ScrollTriggers
+
+    // Animate section label with advanced effects
+    if (sectionLabel) {
+      const labelDot = sectionLabel.querySelector(".label-dot");
+      const labelText = sectionLabel.querySelector(".label-text");
+
+      gsap.set(sectionLabel, { opacity: 0, scale: 0.8, rotation: -5 });
+      gsap.set(labelDot, { scale: 0, rotation: 180 });
+      gsap.set(labelText, { opacity: 0, x: -20 });
+
+      const st1 = ScrollTrigger.create({
+        trigger: sectionLabel,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(sectionLabel, {
+            opacity: 1,
+            scale: 1,
+            rotation: 0,
+            duration: 1,
+            ease: "elastic.out(1, 0.5)",
+          });
+        },
+      });
+      scrollTriggers.push(st1);
+
+      gsap.to(labelDot, {
+        scale: 1,
+        rotation: 0,
+        duration: 0.8,
+        ease: "back.out(2)",
+        delay: 0.2,
+      });
+
+      gsap.to(labelText, {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        ease: "power3.out",
+        delay: 0.3,
+      });
+    }
+
+    // Animate title words with advanced 3D effects
+    if (titleWords.length > 0) {
+      titleWords.forEach((word, index) => {
+        gsap.set(word, {
+          opacity: 0,
+          y: 80,
+          rotationX: -90,
+          rotationY: index % 2 === 0 ? -20 : 20,
+          transformOrigin: "50% 50% -50",
+          scale: 0.8,
+        });
+      });
+
+      const st2 = ScrollTrigger.create({
+        trigger: ".section-title",
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          gsap.to(titleWords, {
+            opacity: 1,
+            y: 0,
+            rotationX: 0,
+            rotationY: 0,
+            scale: 1,
+            duration: 1.2,
+            stagger: {
+              amount: 0.6,
+              from: "start",
+              ease: "power2.inOut",
+            },
+            ease: "power3.out",
+          });
+        },
+      });
+      scrollTriggers.push(st2);
+
+      // Add magnetic hover effect to title words
+      titleWords.forEach((word) => {
+        word.addEventListener("mouseenter", () => {
+          gsap.to(word, {
+            scale: 1.1,
+            y: -5,
+            rotationY: 5,
+            duration: 0.4,
+            ease: "back.out(1.7)",
+          });
+        });
+
+        word.addEventListener("mouseleave", () => {
+          gsap.to(word, {
+            scale: 1,
+            y: 0,
+            rotationY: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+        });
+      });
+    }
+
+    // Animate subtitle
+    if (sectionSubtitle) {
+      const st3 = ScrollTrigger.create({
+        trigger: sectionSubtitle,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(sectionSubtitle, {
+            opacity: 1,
+            x: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          });
+        },
+      });
+      scrollTriggers.push(st3);
+    }
+
+    // Animate gradient orbs - optimized to reduce ScrollTriggers
+    gradientOrbs.forEach((orb, index) => {
+      // Initial entrance - use single ScrollTrigger for all orbs
+      if (index === 0) {
+        const st4 = ScrollTrigger.create({
+          trigger: "#projects",
+          start: "top 90%",
+          once: true,
+          onEnter: () => {
+            gradientOrbs.forEach((o, i) => {
+              gsap.to(o, {
+                opacity: 0.4,
+                scale: 1,
+                duration: 1.5,
+                delay: i * 0.2,
+                ease: "power2.out",
+              });
+            });
+          },
+        });
+        scrollTriggers.push(st4);
+      }
+
+      // Continuous floating animation - no ScrollTrigger needed
+      const anim1 = gsap.to(orb, {
+        y: `+=${(index + 1) * 30}`,
+        x: `+=${(index % 2 === 0 ? 1 : -1) * 20}`,
+        duration: 12 + index * 2,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+      animationInstances.push(anim1);
+
+      // Single optimized parallax ScrollTrigger for all orbs
+      if (index === 0) {
+        const st5 = ScrollTrigger.create({
+          trigger: "#projects",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 2, // Increased scrub value for better performance
+          onUpdate: (self: any) => {
+            gradientOrbs.forEach((o, i) => {
+              const progress = self.progress;
+              gsap.set(o, {
+                y: progress * (i + 1) * 30,
+                x: progress * (i % 2 === 0 ? 1 : -1) * 20,
+              });
+            });
+          },
+        });
+        scrollTriggers.push(st5);
+      }
+
+      // Pulsing glow effect - lighter animation
+      const anim2 = gsap.to(orb, {
+        opacity: 0.5,
+        duration: 4 + index,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+      animationInstances.push(anim2);
+    });
+
+    // Animate project cards with advanced effects
+    projectCards.forEach((card, index) => {
+      const cardElement = card;
+      const cardContent = card.querySelector(".card-content");
+      const cardIcon = card.querySelector(".card-icon");
+      const cardTitle = card.querySelector(".card-title");
+      const cardDescription = card.querySelector(".card-description");
+      const cardFooter = card.querySelector(".card-footer");
+      const cardSpotlight = card.querySelector(".card-spotlight");
+      const cardBorder = card.querySelector(".card-border");
+
+      // Initial state
+      gsap.set(cardElement, {
+        opacity: 0,
+        y: 100,
+        rotationY: -15,
+        transformPerspective: 1000,
+      });
+
+      // Entrance animation with optimized scroll trigger
+      const st6 = ScrollTrigger.create({
+        trigger: cardElement,
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(cardElement, {
+            opacity: 1,
+            y: 0,
+            rotationY: 0,
+            duration: 1,
+            ease: "power3.out",
+          });
+        },
+      });
+      scrollTriggers.push(st6);
+
+      // Animate card content elements - combine with card entrance
+      if (cardContent) {
+        // Use the same ScrollTrigger as card entrance
+        st6.onEnter = () => {
+          gsap.to(cardElement, {
+            opacity: 1,
+            y: 0,
+            rotationY: 0,
+            duration: 1,
+            ease: "power3.out",
+          });
+          gsap.to([cardIcon, cardTitle, cardDescription, cardFooter], {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.1,
+            delay: 0.3,
+            ease: "power2.out",
+          });
+        };
+      }
+
+      // Advanced hover animations with magnetic effect
+      const hoverTL = gsap.timeline({ paused: true });
+      let isHovered = false;
+
+      // Magnetic effect - optimized with throttling
+      let rafId: number | null = null;
+      const handleMouseMove = (e: Event) => {
+        if (!isHovered) return;
+
+        // Throttle with requestAnimationFrame
+        if (rafId) return;
+
+        rafId = requestAnimationFrame(() => {
+          const mouseEvent = e as MouseEvent;
+          const rect = cardElement.getBoundingClientRect();
+          const x = mouseEvent.clientX - rect.left;
+          const y = mouseEvent.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          // Calculate distance from center
+          const deltaX = (x - centerX) / centerX;
+          const deltaY = (y - centerY) / centerY;
+
+          // Reduced magnetic effect for better performance
+          const magneticX = deltaX * 10;
+          const magneticY = deltaY * 10;
+
+          // 3D tilt effect - reduced intensity
+          const rotateX = (y - centerY) / 12;
+          const rotateY = (centerX - x) / 12;
+
+          gsap.to(cardElement, {
+            x: magneticX,
+            y: magneticY,
+            rotationX: rotateX,
+            rotationY: rotateY,
+            transformPerspective: 1000,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          // Update spotlight position
+          (cardElement as HTMLElement).style.setProperty("--mouse-x", `${x}px`);
+          (cardElement as HTMLElement).style.setProperty("--mouse-y", `${y}px`);
+
+          rafId = null;
+        });
+      };
+
+      cardElement.addEventListener("mouseenter", () => {
+        isHovered = true;
+        hoverTL.play();
+        cardElement.addEventListener("mousemove", handleMouseMove);
+
+        // Add scale and glow on enter
+        gsap.to(cardElement, {
+          scale: 1.02,
+          z: 50,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        // Animate card elements on hover with advanced effects
+        if (cardIcon) {
+          const iconGlow = card.querySelector(".icon-glow");
+
+          gsap.to(cardIcon, {
+            scale: 1.2,
+            rotation: -12,
+            y: -5,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          });
+
+          if (iconGlow) {
+            gsap.to(iconGlow, {
+              opacity: 0.8,
+              scale: 1.5,
+              duration: 0.6,
+              ease: "power2.out",
+            });
+          }
+        }
+
+        if (cardTitle) {
+          gsap.to(cardTitle, {
+            y: -5,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
+
+        if (cardSpotlight) {
+          gsap.to(cardSpotlight, {
+            opacity: 1,
+            duration: 0.3,
+          });
+        }
+
+        if (cardBorder) {
+          gsap.to(cardBorder, {
+            opacity: 1,
+            duration: 0.5,
+          });
+        }
+
+        // Animate stats
+        const stats = card.querySelectorAll(".stat");
+        gsap.to(stats, {
+          y: -3,
+          duration: 0.4,
+          stagger: 0.05,
+          ease: "power2.out",
+        });
+
+        // Animate action button
+        const actionArrow = card.querySelector(".action-arrow");
+        if (actionArrow) {
+          gsap.to(actionArrow, {
+            x: 8,
+            scale: 1.1,
+            rotation: -45,
+            duration: 0.5,
+            ease: "back.out(1.7)",
+          });
+        }
+      });
+
+      cardElement.addEventListener("mouseleave", () => {
+        isHovered = false;
+        hoverTL.reverse();
+        cardElement.removeEventListener("mousemove", handleMouseMove);
+
+        // Reset all transforms with smooth animation
+        gsap.to(cardElement, {
+          x: 0,
+          y: 0,
+          rotationX: 0,
+          rotationY: 0,
+          scale: 1,
+          z: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        });
+
+        // Reset card elements
+        if (cardIcon) {
+          const iconGlow = card.querySelector(".icon-glow");
+
+          gsap.to(cardIcon, {
+            scale: 1,
+            rotation: 0,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          });
+
+          if (iconGlow) {
+            gsap.to(iconGlow, {
+              opacity: 0,
+              scale: 1,
+              duration: 0.6,
+              ease: "power2.out",
+            });
+          }
+        }
+
+        if (cardTitle) {
+          gsap.to(cardTitle, {
+            y: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
+
+        if (cardSpotlight) {
+          gsap.to(cardSpotlight, {
+            opacity: 0,
+            duration: 0.3,
+          });
+        }
+
+        if (cardBorder) {
+          gsap.to(cardBorder, {
+            opacity: 0.5,
+            duration: 0.5,
+          });
+        }
+
+        const stats = card.querySelectorAll(".stat");
+        gsap.to(stats, {
+          y: 0,
+          duration: 0.4,
+          stagger: 0.05,
+          ease: "power2.out",
+        });
+
+        const actionArrow = card.querySelector(".action-arrow");
+        if (actionArrow) {
+          gsap.to(actionArrow, {
+            x: 0,
+            scale: 1,
+            rotation: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
+      });
+
+      // Remove individual parallax - too many ScrollTriggers
+      // Parallax is handled globally for better performance
+    });
+
+    // Animate CTA button with optimized effects
+    if (ctaButton) {
+      const ctaBg = ctaButton.querySelector(".cta-bg");
+      const ctaIcon = ctaButton.querySelector(".cta-icon");
+      const ctaText = ctaButton.querySelector(".cta-text");
+
+      gsap.set(ctaButton, { opacity: 0, scale: 0.8, y: 50 });
+      if (ctaBg) gsap.set(ctaBg, { scale: 0.8, opacity: 0 });
+      if (ctaIcon) gsap.set(ctaIcon, { x: -20, opacity: 0 });
+      if (ctaText) gsap.set(ctaText, { opacity: 0, y: 10 });
+
+      const st7 = ScrollTrigger.create({
+        trigger: ctaButton,
+        start: "top 90%",
+        once: true,
+        onEnter: () => {
+          const ctaTL = gsap.timeline();
+          ctaTL.to(ctaButton, {
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            duration: 1,
+            ease: "elastic.out(1, 0.5)",
+          });
+          ctaTL.to(
+            [ctaText, ctaIcon],
+            {
+              opacity: 1,
+              x: 0,
+              y: 0,
+              duration: 0.6,
+              stagger: 0.1,
+              ease: "power2.out",
+            },
+            "-=0.5",
+          );
+          if (ctaBg) {
+            ctaTL.to(
+              ctaBg,
+              {
+                scale: 1,
+                opacity: 0.3,
+                duration: 0.8,
+                ease: "power2.out",
+              },
+              "-=0.4",
+            );
+          }
+        },
+      });
+      scrollTriggers.push(st7);
+
+      // Advanced hover animation for CTA
+      ctaButton.addEventListener("mouseenter", () => {
+        const ctaIcon = ctaButton.querySelector(".cta-icon");
+        const ctaBg = ctaButton.querySelector(".cta-bg");
+
+        gsap.to(ctaButton, {
+          scale: 1.08,
+          y: -8,
+          rotation: 2,
+          duration: 0.5,
+          ease: "back.out(1.7)",
+        });
+
+        if (ctaIcon) {
+          gsap.to(ctaIcon, {
+            x: 12,
+            rotation: -45,
+            scale: 1.2,
+            duration: 0.5,
+            ease: "back.out(1.7)",
+          });
+        }
+
+        if (ctaBg) {
+          gsap.to(ctaBg, {
+            opacity: 1,
+            scale: 1.1,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
+      });
+
+      ctaButton.addEventListener("mouseleave", () => {
+        const ctaIcon = ctaButton.querySelector(".cta-icon");
+        const ctaBg = ctaButton.querySelector(".cta-bg");
+
+        gsap.to(ctaButton, {
+          scale: 1,
+          y: 0,
+          rotation: 0,
+          duration: 0.5,
+          ease: "power2.out",
+        });
+
+        if (ctaIcon) {
+          gsap.to(ctaIcon, {
+            x: 0,
+            rotation: 0,
+            scale: 1,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
+
+        if (ctaBg) {
+          gsap.to(ctaBg, {
+            opacity: 0.3,
+            scale: 1,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        }
+      });
+    }
+
+    // Animate grid lines - optimized
+    if (gridLines) {
+      // Single ScrollTrigger for fade in
+      const st8 = ScrollTrigger.create({
+        trigger: "#projects",
+        start: "top 90%",
+        once: true,
+        onEnter: () => {
+          gsap.to(gridLines, { opacity: 1, duration: 2 });
+          if (noiseOverlay) {
+            gsap.to(noiseOverlay, { opacity: 0.03, duration: 1.5 });
+          }
+        },
+      });
+      scrollTriggers.push(st8);
+
+      // Continuous movement - no ScrollTrigger
+      const anim3 = gsap.to(gridLines, {
+        backgroundPosition: "60px 60px",
+        duration: 20,
+        repeat: -1,
+        ease: "none",
+      });
+      animationInstances.push(anim3);
+    }
+
+    // Floating animation for orbs
+    gradientOrbs.forEach((orb, index) => {
+      gsap.to(orb, {
+        y: "+=50",
+        x: index % 2 === 0 ? "+=30" : "-=30",
+        rotation: 360,
+        duration: 15 + index * 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+      });
+    });
+  }
+
+  // Initialize animations
+  initGSAPAnimations();
+
+  // Cleanup on page unload
+  if (typeof window !== "undefined") {
+    window.addEventListener("beforeunload", () => {
+      scrollTriggers.forEach((st) => st?.kill());
+      animationInstances.forEach((anim) => anim?.kill());
+    });
+  }
+</script>
+
+<style>
+  #projects {
+    position: relative;
+    padding: 10rem 2rem;
+    min-height: 100vh;
+    background: #000000;
+    overflow: hidden;
+  }
+
+  /* Background Effects */
+  .projects-bg-effects {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.4;
+    animation: orbFloat 20s ease-in-out infinite;
+  }
+
+  .orb-1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+      circle,
+      rgba(59, 130, 246, 0.4) 0%,
+      transparent 70%
+    );
+    top: -200px;
+    left: -200px;
+    animation-delay: 0s;
+  }
+
+  .orb-2 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.3) 0%,
+      transparent 70%
+    );
+    bottom: -150px;
+    right: -150px;
+    animation-delay: -7s;
+  }
+
+  .orb-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(
+      circle,
+      rgba(6, 182, 212, 0.25) 0%,
+      transparent 70%
+    );
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -14s;
+  }
+
+  @keyframes orbFloat {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    25% {
+      transform: translate(50px, -30px) scale(1.1);
+    }
+    50% {
+      transform: translate(-30px, 50px) scale(0.9);
+    }
+    75% {
+      transform: translate(-50px, -20px) scale(1.05);
+    }
+  }
+
+  .orb-3 {
+    animation-name: orbFloatCenter;
+  }
+
+  @keyframes orbFloatCenter {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    25% {
+      transform: translate(-45%, -55%) scale(1.1);
+    }
+    50% {
+      transform: translate(-55%, -45%) scale(0.9);
+    }
+    75% {
+      transform: translate(-48%, -52%) scale(1.05);
+    }
+  }
+
+  .grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(
+      ellipse at center,
+      black 0%,
+      transparent 70%
+    );
+  }
+
+  .noise-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Section Header */
+  .section-header {
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.6rem 1.2rem;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.15) 0%,
+        rgba(139, 92, 246, 0.1) 100%
+      ),
+      rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-label::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    animation: labelShimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes labelShimmer {
+    0%,
+    100% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+  }
+
+  .label-dot {
+    width: 8px;
+    height: 8px;
+    background: #3b82f6;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
+    animation: dotPulse 2s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+  }
+
+  @keyframes dotPulse {
+    0%,
+    100% {
+      opacity: 1;
+      box-shadow:
+        0 0 0 0 rgba(59, 130, 246, 0.8),
+        0 0 10px rgba(59, 130, 246, 0.8);
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.7;
+      box-shadow:
+        0 0 0 10px rgba(59, 130, 246, 0),
+        0 0 15px rgba(59, 130, 246, 0.6);
+      transform: scale(1.2);
+    }
+  }
+
+  .label-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #3b82f6;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+  }
+
+  .section-title {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .title-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .title-word {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleReveal 0.8s ease-out forwards;
+    animation-delay: calc(var(--i) * 0.1s);
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  @keyframes titleReveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .section-subtitle {
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .subtitle-bracket {
+    color: rgba(59, 130, 246, 0.6);
+    font-weight: 300;
+  }
+
+  /* Projects Grid */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  /* Project Card */
+  .project-card {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    --card-color: #3b82f6;
+
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border-radius: 24px;
+    opacity: 0;
+    transform: translateY(40px);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    will-change: transform, opacity, filter;
+    contain: layout style paint;
+    backface-visibility: hidden;
+    transition: filter 0.3s ease;
+  }
+
+  .project-card:hover {
+    filter: brightness(1.1);
+  }
+
+  .project-card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .project-card.blue {
+    --card-color: #3b82f6;
+  }
+  .project-card.purple {
+    --card-color: #8b5cf6;
+  }
+  .project-card.cyan {
+    --card-color: #06b6d4;
+  }
+  .project-card.green {
+    --card-color: #22c55e;
+  }
+  .project-card.orange {
+    --card-color: #f97316;
+  }
+  .project-card.pink {
+    --card-color: #ec4899;
+  }
+
+  /* Card Spotlight Effect */
+  .card-spotlight {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: radial-gradient(
+      600px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 255, 255, 0.06),
+      transparent 40%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  .project-card:hover .card-spotlight {
+    opacity: 1;
+  }
+
+  /* Card Border */
+  .card-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+
+  .project-card:hover .card-border {
+    background: linear-gradient(
+      135deg,
+      var(--card-color) 0%,
+      transparent 50%,
+      var(--card-color) 100%
+    );
+  }
+
+  /* Card Noise */
+  .card-noise {
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.02;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* Card Content */
+  .card-content {
+    position: relative;
+    z-index: 3;
+    padding: 2rem;
+    background: linear-gradient(
+      135deg,
+      rgba(15, 15, 20, 0.9) 0%,
+      rgba(10, 10, 15, 0.95) 100%
+    );
+    border-radius: 24px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    will-change: transform, background;
+    contain: layout style paint;
+  }
+
+  .project-card:hover .card-content {
+    background: linear-gradient(
+      135deg,
+      rgba(20, 20, 28, 0.95) 0%,
+      rgba(15, 15, 22, 0.98) 100%
+    );
+  }
+
+  /* Card Header */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-icon-wrapper {
+    position: relative;
+  }
+
+  .icon-glow {
+    position: absolute;
+    inset: -15px;
+    background: radial-gradient(circle, var(--card-color) 0%, transparent 70%);
+    filter: blur(25px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    animation: iconGlowPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes iconGlowPulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+  }
+
+  .project-card:hover .icon-glow {
+    opacity: 0.5;
+  }
+
+  .card-icon {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    padding: 15px;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.02) 100%
+      ),
+      rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    color: var(--card-color);
+    will-change: transform, filter;
+    overflow: hidden;
+    transition: filter 0.3s ease;
+  }
+
+  .project-card:hover .card-icon {
+    filter: drop-shadow(0 0 20px var(--card-color));
+  }
+
+  .card-icon::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .project-card:hover .card-icon::before {
+    transform: translateX(100%);
+  }
+
+  .card-icon svg {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  }
+
+  .project-card:hover .card-icon {
+    background:
+      linear-gradient(135deg, var(--card-color) 0%, rgba(0, 0, 0, 0.2) 100%),
+      rgba(0, 0, 0, 0.5);
+    border-color: var(--card-color);
+    box-shadow:
+      0 0 40px rgba(var(--card-color), 0.4),
+      0 8px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .card-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 100px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  .badge-text {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #22c55e;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Card Body */
+  .card-body {
+    flex: 1;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+
+  .title-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(
+      135deg,
+      #ffffff 0%,
+      rgba(255, 255, 255, 0.9) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    transition: all 0.4s ease;
+    position: relative;
+    display: inline-block;
+  }
+
+  .project-card:hover .title-text {
+    background: linear-gradient(
+      135deg,
+      var(--card-color) 0%,
+      #ffffff 50%,
+      var(--card-color) 100%
+    );
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleShimmer 2s ease-in-out infinite;
+  }
+
+  @keyframes titleShimmer {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .title-underline {
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--card-color) 0%, transparent 100%);
+    border-radius: 2px;
+    transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 0 10px var(--card-color);
+  }
+
+  .project-card:hover .title-underline {
+    width: 100%;
+  }
+
+  .card-description {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.4s ease;
+  }
+
+  .project-card:hover .card-description {
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Card Footer */
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .card-stats {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    padding: 4px 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .project-card:hover .stat {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .stat svg {
+    opacity: 0.6;
+    transition: all 0.3s ease;
+  }
+
+  .project-card:hover .stat svg {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px var(--card-color));
+  }
+
+  .card-action {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--card-color);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card-action::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--card-color) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .project-card:hover .card-action {
+    background: rgba(var(--card-color), 0.1);
+    box-shadow: 0 0 20px rgba(var(--card-color), 0.2);
+    transform: translateX(5px);
+  }
+
+  .project-card:hover .card-action::before {
+    opacity: 0.1;
+  }
+
+  .action-text {
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.05em;
+  }
+
+  .project-card:hover .action-text {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .action-arrow {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    z-index: 1;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform, filter;
+  }
+
+  .project-card:hover .action-arrow {
+    filter: drop-shadow(0 0 8px var(--card-color));
+  }
+
+  .project-card:hover .action-arrow {
+    transform: translateX(8px) scale(1.1);
+    filter: drop-shadow(0 0 10px var(--card-color));
+  }
+
+  /* Card Reflection */
+  .card-reflection {
+    position: absolute;
+    bottom: -40%;
+    left: 5%;
+    right: 5%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.03) 0%,
+      transparent 50%
+    );
+    border-radius: 24px;
+    transform: scaleY(-1);
+    filter: blur(15px);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .project-card:hover .card-reflection {
+    opacity: 1;
+  }
+
+  /* Section CTA */
+  .section-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
+  }
+
+  .cta-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 1.2rem 2.5rem;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(59, 130, 246, 0.1) 0%,
+        rgba(139, 92, 246, 0.05) 100%
+      ),
+      rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+
+  .cta-button::before {
+    content: "";
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6, #3b82f6);
+    background-size: 200% 200%;
+    border-radius: 100px;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.5s ease;
+    animation: borderRotate 3s linear infinite;
+  }
+
+  @keyframes borderRotate {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .cta-button:hover::before {
+    opacity: 1;
+  }
+
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.8) 0%,
+      rgba(139, 92, 246, 0.8) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .cta-button:hover .cta-bg {
+    opacity: 1;
+  }
+
+  .cta-button:hover {
+    border-color: transparent;
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+      0 20px 60px rgba(59, 130, 246, 0.4),
+      0 0 40px rgba(139, 92, 246, 0.3);
+  }
+
+  .cta-text {
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .cta-icon {
+    position: relative;
+    z-index: 1;
+    width: 22px;
+    height: 22px;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+  }
+
+  .cta-button:hover .cta-icon {
+    transform: translateX(8px) rotate(-45deg);
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8));
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 1200px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    #projects {
+      padding: 6rem 1.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 4rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    .section-subtitle {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .section-title {
+      font-size: 2.5rem;
+    }
+
+    .card-header {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .card-footer {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .gradient-orb,
+    .label-dot,
+    .title-word,
+    .badge-dot {
+      animation: none;
+    }
+
+    .project-card {
+      opacity: 1;
+      transform: none;
+    }
+
+    .project-card.in-view {
+      transition: none;
+    }
+  }
+</style>

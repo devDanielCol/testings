@@ -1,16 +1,44 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Navigation from "../components/astro/Navigation.astro";
+import Hero from "../components/astro/Hero.astro";
+import Projects from "../components/astro/Projects.astro";
+import Footer from "../components/astro/Footer.astro";
+import { useTranslations } from "../i18n";
+import { homeT } from "../i18n/pages/home";
 
+const t = useTranslations(homeT);
+
+const url = "https://danielfcramos.dev";
+const image = "https://danielfcramos.dev/images/danielfcramos.dev-logo.png";
+const canonical = "https://danielfcramos.dev/";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout
+  lang="es"
+  title={t('es', 'meta.title')}
+  description={t('es', 'meta.description')}
+  keywords={t('es', 'meta.keywords')}
+  author="Daniel Cubillos"
+  url={url}
+  image={image}
+  twitterCard="summary_large_image"
+  twitterSite="@dan_cubillos"
+  twitterCreator="@dan_cubillos"
+  twitterTitle="danielfcramos.dev"
+  twitterDescription={t('es', 'meta.twitterDescription')}
+  canonical={canonical}
+>
+  <Navigation lang="es" />
+  <main>
+    <Hero client:load />
+    <Projects lang="es" client:idle />
+  </main>
+  <Footer lang="es" />
+</Layout>
+
+<style>
+  main {
+    padding-top: 80px;
+  }
+</style>

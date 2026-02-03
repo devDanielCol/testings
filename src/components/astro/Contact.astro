@@ -1,0 +1,2485 @@
+---
+const socialLinks = [
+  {
+    name: "GitHub",
+    url: "https://github.com/yourusername",
+    icon: "github",
+    description: "Check out my open source projects and contributions",
+    stats: "150+ repositories",
+    color: "#ffffff",
+  },
+  {
+    name: "Email",
+    url: "mailto:your.email@example.com",
+    icon: "email",
+    description: "Drop me a message, I'll get back to you soon",
+    stats: "Response within 24h",
+    color: "#ea4335",
+  },
+];
+
+const contactInfo = [
+  {
+    label: "Location",
+    value: "San Francisco, CA",
+    icon: "location",
+    detail: "PST Timezone",
+  },
+  {
+    label: "Availability",
+    value: "Open for opportunities",
+    icon: "calendar",
+    detail: "Full-time & Contract",
+  },
+  {
+    label: "Response Time",
+    value: "Within 24 hours",
+    icon: "clock",
+    detail: "Business days",
+  },
+];
+---
+
+<section id="contact">
+  <!-- Enhanced Background System -->
+  <div class="contact-bg-effects">
+    <div class="contact-orb orb-1"></div>
+    <div class="contact-orb orb-2"></div>
+    <div class="contact-orb orb-3"></div>
+    <canvas id="contact-particles"></canvas>
+  </div>
+
+  <!-- Minimal Decorative Frame -->
+  <div class="contact-decoration">
+    <div class="decoration-corner corner-tl"></div>
+    <div class="decoration-corner corner-tr"></div>
+    <div class="decoration-corner corner-bl"></div>
+    <div class="decoration-corner corner-br"></div>
+  </div>
+
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section-header">
+      <div class="section-label">
+        <span class="label-dot"></span>
+        <span class="label-text">Let's Connect</span>
+      </div>
+      <h2 class="section-title">
+        <span class="title-bracket">&lt;</span>
+        <span class="title-text">Get In Touch</span>
+        <span class="title-bracket">/&gt;</span>
+      </h2>
+      <p class="section-subtitle">
+        Ready to collaborate? Let's build something amazing together
+      </p>
+    </div>
+
+    <!-- Contact Content Grid -->
+    <div class="contact-grid-layout">
+      <!-- Left Column: Info Cards -->
+      <div class="contact-info-section">
+        <div class="info-header">
+          <h3 class="info-title">Quick Info</h3>
+          <div class="info-underline"></div>
+        </div>
+        <div class="info-cards">
+          {
+            contactInfo.map((info, index) => (
+              <div class="info-card" style={`--card-index: ${index}`}>
+                <div class="info-card-glow" />
+                <div class="info-card-content">
+                  <div class="info-icon">
+                    {info.icon === "location" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                    )}
+                    {info.icon === "calendar" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <rect
+                          x="3"
+                          y="4"
+                          width="18"
+                          height="18"
+                          rx="2"
+                          ry="2"
+                        />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </svg>
+                    )}
+                    {info.icon === "clock" && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                      >
+                        <circle cx="12" cy="12" r="10" />
+                        <polyline points="12 6 12 12 16 14" />
+                      </svg>
+                    )}
+                  </div>
+                  <div class="info-text">
+                    <span class="info-label">{info.label}</span>
+                    <span class="info-value">{info.value}</span>
+                    <span class="info-detail">{info.detail}</span>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <!-- CTA Section -->
+        <div class="contact-cta">
+          <div class="cta-box">
+            <div class="cta-box-border"></div>
+            <div class="cta-icon-wrapper">
+              <div class="cta-icon-ring"></div>
+              <svg
+                class="cta-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                ></path>
+              </svg>
+            </div>
+            <div class="cta-content">
+              <h4 class="cta-title">Ready to collaborate?</h4>
+              <p class="cta-text">
+                Let's discuss your next project and bring your ideas to life
+              </p>
+              <a href="mailto:your.email@example.com" class="cta-button">
+                <span class="cta-button-bg"></span>
+                <span class="cta-button-text">Start a Conversation</span>
+                <svg
+                  class="cta-button-arrow"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Chat Form & Social Links -->
+      <div class="social-links-section">
+        <!-- Social Links (GitHub & Email) -->
+        <div class="social-links-compact">
+          {
+            socialLinks.map((social, index) => (
+              <a
+                href={social.url}
+                class={`social-link-compact social-${social.icon}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={`--link-color: ${social.color}`}
+                title={social.name}
+              >
+                <div class="link-glow" />
+                <div class="link-icon-wrapper">
+                  {social.icon === "github" && (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                  )}
+                  {social.icon === "email" && (
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                      <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                  )}
+                </div>
+                <span class="link-label">{social.name}</span>
+              </a>
+            ))
+          }
+        </div>
+
+        <!-- WhatsApp-style Chat Form -->
+        <div class="chat-form-container">
+          <div class="chat-header">
+            <div class="chat-header-info">
+              <div class="chat-avatar">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div class="chat-header-text">
+                <h4 class="chat-name">Your Name</h4>
+                <span class="chat-status">
+                  <span class="status-dot"></span>
+                  Online
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="chat-messages" id="chat-messages">
+            <div class="message received">
+              <div class="message-avatar">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div class="message-content">
+                <div class="message-bubble">
+                  <p>Hi there! 👋</p>
+                  <div class="bubble-tail"></div>
+                </div>
+                <span class="message-time">Just now</span>
+              </div>
+            </div>
+            <div class="message received">
+              <div class="message-avatar">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div class="message-content">
+                <div class="message-bubble">
+                  <p>
+                    I'd love to hear from you. Send me a message and I'll get
+                    back to you soon!
+                  </p>
+                  <div class="bubble-tail"></div>
+                </div>
+                <span class="message-time">Just now</span>
+              </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="message received typing-indicator" id="typing-indicator" style="display: none;">
+              <div class="message-avatar">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <div class="message-content">
+                <div class="message-bubble typing-bubble">
+                  <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <div class="bubble-tail"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form class="chat-input-form" id="contact-form">
+            <div class="input-wrapper">
+              <div class="input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+              </div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your name"
+                required
+                class="chat-input"
+                id="name-input"
+              />
+            </div>
+            <div class="input-wrapper">
+              <div class="input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                  <polyline points="22,6 12,13 2,6"></polyline>
+                </svg>
+              </div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Your email"
+                required
+                class="chat-input"
+                id="email-input"
+              />
+            </div>
+            <div class="input-wrapper message-input-wrapper">
+              <div class="message-input-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+              </div>
+              <textarea
+                name="message"
+                placeholder="Type your message..."
+                required
+                class="chat-input chat-textarea"
+                id="message-input"
+                rows="3"></textarea>
+              <button type="submit" class="send-button" id="send-button">
+                <div class="send-button-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+                  </svg>
+                </div>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Particle Background Animation
+  function initContactParticles() {
+    const canvas = document.getElementById(
+      "contact-particles",
+    ) as HTMLCanvasElement;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext("2d", { alpha: true, desynchronized: true });
+    if (!ctx) return;
+
+    const contactSection = document.getElementById("contact");
+    if (!contactSection) return;
+
+    let animationFrameId: number;
+    let isVisible = true;
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+
+    function resizeCanvas() {
+      if (!contactSection) return;
+      const rect = contactSection.getBoundingClientRect();
+      canvasWidth = rect.width;
+      canvasHeight = rect.height;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
+    }
+    resizeCanvas();
+
+    interface Particle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      size: number;
+      opacity: number;
+      color: string;
+    }
+
+    const particles: Particle[] = [];
+    const particleCount = 40;
+    const colors = [
+      "rgba(59, 130, 246, 0.4)",
+      "rgba(139, 92, 246, 0.4)",
+      "rgba(6, 182, 212, 0.4)",
+    ];
+
+    function initParticles() {
+      particles.length = 0;
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvasWidth,
+          y: Math.random() * canvasHeight,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          size: Math.random() * 2.5 + 1,
+          opacity: Math.random() * 0.4 + 0.3,
+          color: colors[Math.floor(Math.random() * colors.length)],
+        });
+      }
+    }
+    initParticles();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        isVisible = entries[0].isIntersecting;
+        if (!isVisible) {
+          cancelAnimationFrame(animationFrameId);
+        } else {
+          animate();
+        }
+      },
+      { threshold: 0.1 },
+    );
+    observer.observe(contactSection);
+
+    function animate() {
+      if (!ctx || !isVisible) return;
+
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      // Update and draw particles
+      for (let i = 0; i < particles.length; i++) {
+        const particle = particles[i];
+
+        particle.x += particle.vx;
+        particle.y += particle.vy;
+
+        if (particle.x < 0 || particle.x > canvasWidth) particle.vx *= -1;
+        if (particle.y < 0 || particle.y > canvasHeight) particle.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fillStyle = particle.color;
+        ctx.globalAlpha = particle.opacity;
+        ctx.fill();
+      }
+
+      ctx.globalAlpha = 1;
+
+      // Draw connections between nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const p1 = particles[i];
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            const opacity = 0.2 * (1 - distance / 150);
+            ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(animate);
+      }
+    }
+
+    animate();
+
+    let resizeTimer: number;
+    function handleResize() {
+      clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        resizeCanvas();
+        initParticles();
+      }, 250);
+    }
+
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      observer.disconnect();
+      window.removeEventListener("resize", handleResize);
+    };
+  }
+
+  // GSAP Contact Animations
+  async function initContactGSAP() {
+    try {
+      // @ts-ignore
+      const { gsap } = await import("gsap");
+      // @ts-ignore
+      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+      if (prefersReducedMotion || (window as any).__GSAP_DISABLE_ANIMATIONS__) {
+        return;
+      }
+
+      const contact = document.getElementById("contact");
+      if (!contact) return;
+
+      // Get all elements
+      const sectionLabel = contact.querySelector(".section-label");
+      const labelDot = sectionLabel?.querySelector(".label-dot");
+      const labelText = sectionLabel?.querySelector(".label-text");
+      const sectionTitle = contact.querySelector(".section-title");
+      const sectionSubtitle = contact.querySelector(".section-subtitle");
+      const infoCards = contact.querySelectorAll(".info-card");
+      const socialLinks = contact.querySelectorAll(".social-link-compact");
+      const decorationCorners = contact.querySelectorAll(".decoration-corner");
+      const ctaBox = contact.querySelector(".cta-box");
+      const infoHeader = contact.querySelector(".info-header");
+
+      // Set initial states
+      gsap.set(sectionLabel, { opacity: 0, y: -20 });
+      if (labelDot) gsap.set(labelDot, { scale: 0 });
+      if (labelText) gsap.set(labelText, { opacity: 0, x: -10 });
+      gsap.set(sectionTitle, { opacity: 0, y: -40 });
+      gsap.set(sectionSubtitle, { opacity: 0, y: -20 });
+      gsap.set(infoCards, { opacity: 0, y: 40 });
+      gsap.set(socialLinks, { opacity: 0, y: 40 });
+      gsap.set(decorationCorners, { opacity: 0, scale: 0.5 });
+      gsap.set(ctaBox, { opacity: 0, y: 40 });
+      if (infoHeader) {
+        gsap.set(infoHeader, { opacity: 0, y: -20 });
+      }
+
+      // Create main timeline
+      const mainTL = gsap.timeline({
+        scrollTrigger: {
+          trigger: contact,
+          start: "top 75%",
+          toggleActions: "play none none reverse",
+        },
+        defaults: { ease: "power2.out" },
+      });
+
+      // Animate decoration
+      mainTL.to(
+        decorationCorners,
+        {
+          opacity: 0.6,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "back.out(1.5)",
+        },
+        0,
+      );
+
+      // Animate label
+      mainTL.to(
+        sectionLabel,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+        },
+        "-=0.4",
+      );
+
+      if (labelDot) {
+        mainTL.to(
+          labelDot,
+          {
+            scale: 1,
+            duration: 0.5,
+            ease: "back.out(1.5)",
+          },
+          "-=0.4",
+        );
+      }
+
+      if (labelText) {
+        mainTL.to(
+          labelText,
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+          },
+          "-=0.4",
+        );
+      }
+
+      // Animate title
+      mainTL.to(
+        sectionTitle,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+        },
+        "-=0.3",
+      );
+
+      // Animate subtitle
+      mainTL.to(
+        sectionSubtitle,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+        },
+        "-=0.4",
+      );
+
+      // Animate header
+      if (infoHeader) {
+        mainTL.to(
+          infoHeader,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+          },
+          "-=0.2",
+        );
+      }
+
+      // Animate info cards
+      mainTL.to(
+        infoCards,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.15,
+        },
+        "-=0.3",
+      );
+
+      // Animate social links
+      mainTL.to(
+        socialLinks,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+          stagger: 0.12,
+        },
+        "-=0.5",
+      );
+
+      // Animate CTA
+      mainTL.to(
+        ctaBox,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.7,
+        },
+        "-=0.4",
+      );
+
+      // Compact social link hover animations
+      const compactLinks = contact.querySelectorAll(".social-link-compact");
+      compactLinks.forEach((link) => {
+        const linkGlow = link.querySelector(".link-glow");
+        const linkIcon = link.querySelector("svg");
+
+        link.addEventListener("mouseenter", () => {
+          gsap.to(link, {
+            y: -3,
+            scale: 1.05,
+            duration: 0.3,
+            ease: "back.out(1.5)",
+          });
+
+          if (linkGlow) {
+            gsap.to(linkGlow, {
+              opacity: 0.5,
+              duration: 0.3,
+            });
+          }
+
+          if (linkIcon) {
+            gsap.to(linkIcon, {
+              scale: 1.15,
+              rotation: 10,
+              duration: 0.3,
+              ease: "back.out(1.5)",
+            });
+          }
+        });
+
+        link.addEventListener("mouseleave", () => {
+          gsap.to(link, {
+            y: 0,
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          if (linkGlow) {
+            gsap.to(linkGlow, {
+              opacity: 0,
+              duration: 0.3,
+            });
+          }
+
+          if (linkIcon) {
+            gsap.to(linkIcon, {
+              scale: 1,
+              rotation: 0,
+              duration: 0.3,
+              ease: "power2.out",
+            });
+          }
+        });
+      });
+
+      // Animate chat form elements
+      const chatForm = contact.querySelector(".chat-form-container");
+      const chatMessages = contact.querySelectorAll(".message");
+
+      if (chatForm) {
+        gsap.set(chatForm, { opacity: 0, y: 40 });
+        mainTL.to(
+          chatForm,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+          },
+          "-=0.5",
+        );
+
+        // Animate messages sequentially
+        gsap.set(chatMessages, { opacity: 0, x: -30 });
+        chatMessages.forEach((msg, i) => {
+          gsap.to(msg, {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            delay: 1 + i * 0.2,
+            ease: "power2.out",
+          });
+        });
+      }
+
+      // Info cards hover
+      infoCards.forEach((card) => {
+        const cardGlow = card.querySelector(".info-card-glow");
+
+        card.addEventListener("mouseenter", () => {
+          gsap.to(card, {
+            y: -5,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          if (cardGlow) {
+            gsap.to(cardGlow, {
+              opacity: 0.4,
+              duration: 0.3,
+            });
+          }
+        });
+
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, {
+            y: 0,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          if (cardGlow) {
+            gsap.to(cardGlow, {
+              opacity: 0,
+              duration: 0.3,
+            });
+          }
+        });
+      });
+
+      // CTA button hover
+      const ctaButton = contact.querySelector(".cta-button");
+      if (ctaButton) {
+        const ctaButtonBg = ctaButton.querySelector(".cta-button-bg");
+        const ctaButtonArrow = ctaButton.querySelector(".cta-button-arrow");
+
+        ctaButton.addEventListener("mouseenter", () => {
+          gsap.to(ctaButton, {
+            scale: 1.05,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          if (ctaButtonBg) {
+            gsap.to(ctaButtonBg, {
+              opacity: 1,
+              duration: 0.3,
+            });
+          }
+
+          if (ctaButtonArrow) {
+            gsap.to(ctaButtonArrow, {
+              x: 5,
+              duration: 0.3,
+            });
+          }
+        });
+
+        ctaButton.addEventListener("mouseleave", () => {
+          gsap.to(ctaButton, {
+            scale: 1,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+
+          if (ctaButtonBg) {
+            gsap.to(ctaButtonBg, {
+              opacity: 0,
+              duration: 0.3,
+            });
+          }
+
+          if (ctaButtonArrow) {
+            gsap.to(ctaButtonArrow, {
+              x: 0,
+              duration: 0.3,
+            });
+          }
+        });
+      }
+    } catch (error) {
+      console.warn("GSAP not available for contact:", error);
+    }
+  }
+
+  // Chat Form Handler
+  function initChatForm() {
+    const form = document.getElementById("contact-form") as HTMLFormElement;
+    const chatMessages = document.getElementById("chat-messages");
+    const sendButton = document.getElementById("send-button");
+    const typingIndicator = document.getElementById("typing-indicator");
+
+    if (!form || !chatMessages) return;
+
+    // Escape HTML to prevent XSS
+    const escapeHtml = (text: string) => {
+      const div = document.createElement("div");
+      div.textContent = text;
+      return div.innerHTML;
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const name = formData.get("name") as string;
+      const email = formData.get("email") as string;
+      const message = formData.get("message") as string;
+
+      if (!name || !email || !message) return;
+
+      // Trim and escape user input
+      const escapedName = escapeHtml(name.trim());
+      const escapedEmail = escapeHtml(email.trim());
+      const escapedMessage = escapeHtml(message.trim());
+      const timeString = new Date().toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+
+      // Create sent message bubble with enhanced WhatsApp styling
+      const sentMessage = document.createElement("div");
+      sentMessage.className = "message sent";
+
+      sentMessage.innerHTML = `
+        <div class="message-content">
+          <div class="message-bubble">
+            <p class="sender-name">${escapedName}</p>
+            <p>${escapedMessage}</p>
+            <div class="bubble-tail"></div>
+            <div class="message-meta">
+              <span class="message-time-inline">${timeString}</span>
+              <div class="message-status">
+                <svg viewBox="0 0 16 15" fill="currentColor" width="16" height="15">
+                  <path d="M15.01 3.316l-.478-.372a.365.365 0 0 0-.51.063L8.666 9.879a.32.32 0 0 1-.484.033l-.358-.325a.319.319 0 0 0-.484.032l-.378.483a.418.418 0 0 0 .036.541l1.32 1.266c.143.14.361.125.484-.033l6.272-8.048a.366.366 0 0 0-.064-.512zm-4.1 0l-.478-.372a.365.365 0 0 0-.51.063L4.566 9.879a.32.32 0 0 1-.484.033L1.891 7.769a.366.366 0 0 0-.515.006l-.423.433a.364.364 0 0 0 .006.514l3.258 3.185c.143.14.361.125.484-.033l6.272-8.048a.365.365 0 0 0-.063-.51z"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="message-avatar sent-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </div>
+      `;
+
+      // Add message with smooth animation (CSS animation handles this)
+      chatMessages.appendChild(sentMessage);
+
+      // Scroll to bottom smoothly
+      setTimeout(() => {
+        chatMessages.scrollTo({
+          top: chatMessages.scrollHeight,
+          behavior: "smooth",
+        });
+      }, 100);
+
+      // Reset form
+      form.reset();
+
+      // Reset textarea height
+      const textarea = document.getElementById(
+        "message-input",
+      ) as HTMLTextAreaElement;
+      if (textarea) {
+        textarea.style.height = "auto";
+      }
+
+      // Show typing indicator
+      if (typingIndicator) {
+        setTimeout(() => {
+          typingIndicator.style.display = "flex";
+          typingIndicator.style.opacity = "0";
+          typingIndicator.style.transform = "translateX(-20px) scale(0.95)";
+
+          setTimeout(() => {
+            typingIndicator.style.transition = "all 0.3s ease";
+            typingIndicator.style.opacity = "1";
+            typingIndicator.style.transform = "translateX(0) scale(1)";
+          }, 10);
+
+          // Scroll to show typing indicator
+          setTimeout(() => {
+            chatMessages.scrollTo({
+              top: chatMessages.scrollHeight,
+              behavior: "smooth",
+            });
+          }, 100);
+        }, 500);
+      }
+
+      // Show success response after typing delay
+      setTimeout(() => {
+        // Hide typing indicator
+        if (typingIndicator) {
+          typingIndicator.style.opacity = "0";
+          typingIndicator.style.transform = "translateX(-20px) scale(0.95)";
+          setTimeout(() => {
+            typingIndicator.style.display = "none";
+          }, 300);
+        }
+
+        // Create response message
+        const responseMessage = document.createElement("div");
+        responseMessage.className = "message received";
+
+        responseMessage.innerHTML = `
+          <div class="message-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+          </div>
+          <div class="message-content">
+            <div class="message-bubble">
+              <p>Thanks for reaching out, ${escapedName}! ✅</p>
+              <p>I've received your message and will get back to you at <strong>${escapedEmail}</strong> soon.</p>
+              <div class="bubble-tail"></div>
+            </div>
+            <span class="message-time">Just now</span>
+          </div>
+        `;
+
+        responseMessage.style.opacity = "0";
+        responseMessage.style.transform = "translateX(-30px) scale(0.95)";
+        chatMessages.appendChild(responseMessage);
+
+        setTimeout(() => {
+          responseMessage.style.transition =
+            "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+          responseMessage.style.opacity = "1";
+          responseMessage.style.transform = "translateX(0) scale(1)";
+        }, 10);
+
+        setTimeout(() => {
+          chatMessages.scrollTo({
+            top: chatMessages.scrollHeight,
+            behavior: "smooth",
+          });
+        }, 100);
+      }, 2300);
+
+      // Disable button temporarily
+      if (sendButton) {
+        const button = sendButton as HTMLButtonElement;
+        button.disabled = true;
+        button.style.opacity = "0.5";
+        setTimeout(() => {
+          button.disabled = false;
+          button.style.opacity = "1";
+        }, 3000);
+      }
+    });
+
+    // Auto-resize textarea with smooth transition
+    const textarea = document.getElementById(
+      "message-input",
+    ) as HTMLTextAreaElement;
+    if (textarea) {
+      textarea.addEventListener("input", () => {
+        textarea.style.height = "auto";
+        const newHeight = Math.min(Math.max(textarea.scrollHeight, 44), 120);
+        textarea.style.height = newHeight + "px";
+      });
+
+      // Add focus effect
+      textarea.addEventListener("focus", () => {
+        const wrapper = textarea.closest(".message-input-wrapper");
+        if (wrapper) {
+          wrapper.classList.add("focused");
+        }
+      });
+
+      textarea.addEventListener("blur", () => {
+        const wrapper = textarea.closest(".message-input-wrapper");
+        if (wrapper) {
+          wrapper.classList.remove("focused");
+        }
+      });
+    }
+
+    // Add focus effects to all inputs
+    const inputs = form.querySelectorAll(".chat-input");
+    inputs.forEach((input) => {
+      input.addEventListener("focus", () => {
+        const wrapper = input.closest(".input-wrapper");
+        if (wrapper) {
+          wrapper.classList.add("focused");
+        }
+      });
+
+      input.addEventListener("blur", () => {
+        const wrapper = input.closest(".input-wrapper");
+        if (wrapper) {
+          wrapper.classList.remove("focused");
+        }
+      });
+    });
+  }
+
+  // Initialize
+  if (typeof window !== "undefined") {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        initContactParticles();
+        initContactGSAP();
+        initChatForm();
+      });
+    } else {
+      initContactParticles();
+      initContactGSAP();
+      initChatForm();
+    }
+  }
+</script>
+
+<style>
+  #contact {
+    padding: 8rem 2rem;
+    background: linear-gradient(180deg, #000000 0%, #0a0a0f 50%, #000000 100%);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Background Effects */
+  .contact-bg-effects {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .contact-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(130px);
+    opacity: 0.25;
+    will-change: transform, opacity;
+  }
+
+  .contact-orb.orb-1 {
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(
+      circle,
+      rgba(59, 130, 246, 0.5) 0%,
+      transparent 70%
+    );
+    top: -250px;
+    left: -250px;
+    animation: orbFloat1 28s ease-in-out infinite;
+  }
+
+  .contact-orb.orb-2 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.4) 0%,
+      transparent 70%
+    );
+    bottom: -200px;
+    right: -200px;
+    animation: orbFloat2 32s ease-in-out infinite;
+  }
+
+  .contact-orb.orb-3 {
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(
+      circle,
+      rgba(6, 182, 212, 0.3) 0%,
+      transparent 70%
+    );
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: orbFloat3 24s ease-in-out infinite;
+  }
+
+  @keyframes orbFloat1 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(50px, -30px) scale(1.1);
+    }
+    66% {
+      transform: translate(-30px, 50px) scale(0.9);
+    }
+  }
+
+  @keyframes orbFloat2 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(-40px, 40px) scale(1.15);
+    }
+    66% {
+      transform: translate(40px, -30px) scale(0.95);
+    }
+  }
+
+  @keyframes orbFloat3 {
+    0%,
+    100% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+      transform: translate(-48%, -52%) scale(1.15);
+    }
+  }
+
+  #contact-particles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  /* Decorative Frame */
+  .contact-decoration {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .decoration-corner {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+  }
+
+  .decoration-corner.corner-tl {
+    top: 3rem;
+    left: 3rem;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .decoration-corner.corner-tr {
+    top: 3rem;
+    right: 3rem;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .decoration-corner.corner-bl {
+    bottom: 3rem;
+    left: 3rem;
+    border-right: none;
+    border-top: none;
+  }
+
+  .decoration-corner.corner-br {
+    bottom: 3rem;
+    right: 3rem;
+    border-left: none;
+    border-top: none;
+  }
+
+  /* Container */
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  /* Section Header */
+  .section-header {
+    text-align: center;
+    margin-bottom: 6rem;
+  }
+
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 100px;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+  }
+
+  .label-dot {
+    width: 8px;
+    height: 8px;
+    background: #3b82f6;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+  }
+
+  .label-text {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #3b82f6;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .title-bracket {
+    color: #3b82f6;
+    font-weight: 400;
+    font-size: 0.9em;
+    opacity: 0.8;
+  }
+
+  .title-text {
+    background: linear-gradient(135deg, #ffffff 0%, #c0c0c0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.02em;
+  }
+
+  .section-subtitle {
+    font-family: "Courier New", monospace;
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0.08em;
+  }
+
+  /* Contact Grid Layout */
+  .contact-grid-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 3rem;
+    align-items: start;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  /* Info Section */
+  .contact-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .info-header {
+    margin-bottom: 2rem;
+  }
+
+  .info-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.75rem;
+  }
+
+  .info-underline {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6 0%, transparent 100%);
+    border-radius: 2px;
+  }
+
+  .info-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .info-card {
+    position: relative;
+    padding: 1.5rem;
+    background: rgba(15, 15, 20, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+
+  .info-card:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(15, 15, 20, 0.95);
+  }
+
+  .info-card-glow {
+    position: absolute;
+    inset: -2px;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(59, 130, 246, 0.2) 0%,
+      transparent 60%
+    );
+    opacity: 0;
+    filter: blur(15px);
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .info-card-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .info-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.15) 0%,
+      rgba(139, 92, 246, 0.1) 100%
+    );
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+    color: #3b82f6;
+  }
+
+  .info-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .info-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .info-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .info-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  .info-detail {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* CTA Box */
+  .cta-box {
+    position: relative;
+    padding: 2rem;
+    background: rgba(15, 15, 20, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .cta-box-border {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.4) 0%,
+      rgba(139, 92, 246, 0.4) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .cta-icon-wrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cta-icon-ring {
+    position: absolute;
+    inset: -8px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50%;
+    animation: ringRotate 8s linear infinite;
+  }
+
+  @keyframes ringRotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .cta-icon {
+    position: relative;
+    z-index: 1;
+    width: 50px;
+    height: 50px;
+    color: #3b82f6;
+    filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.6));
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-text {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 2rem;
+  }
+
+  .cta-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.15) 0%,
+      rgba(139, 92, 246, 0.1) 100%
+    );
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    border-radius: 100px;
+    color: #ffffff;
+    font-weight: 600;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.4s ease;
+  }
+
+  .cta-button-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.8) 0%,
+      rgba(139, 92, 246, 0.8) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .cta-button:hover .cta-button-bg {
+    opacity: 1;
+  }
+
+  .cta-button-text {
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.05em;
+  }
+
+  .cta-button-arrow {
+    position: relative;
+    z-index: 1;
+    width: 18px;
+    height: 18px;
+    transition: transform 0.4s ease;
+  }
+
+  /* Compact Social Links */
+  .social-links-compact {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .social-link-compact {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: rgba(15, 15, 20, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    flex: 1;
+  }
+
+  .social-link-compact:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(15, 15, 20, 0.95);
+  }
+
+  .social-link-compact .link-glow {
+    position: absolute;
+    inset: -3px;
+    background: radial-gradient(
+      circle at 50% 50%,
+      var(--link-color) 0%,
+      transparent 60%
+    );
+    opacity: 0;
+    filter: blur(15px);
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+
+  .social-link-compact .link-icon-wrapper {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .social-link-compact svg {
+    position: relative;
+    z-index: 1;
+    color: var(--link-color);
+    transition: all 0.3s ease;
+  }
+
+  .link-label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* Chat Form Container */
+  .chat-form-container {
+    background: rgba(15, 15, 20, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .chat-header {
+    padding: 1.25rem 1.5rem;
+    background: rgba(59, 130, 246, 0.08);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.15);
+  }
+
+  .chat-header-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .chat-avatar {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .chat-avatar svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+  }
+
+  .chat-header-text {
+    flex: 1;
+  }
+
+  .chat-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 0.25rem;
+  }
+
+  .chat-status {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes badgePulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  /* Chat Messages */
+  .chat-messages {
+    padding: 1.5rem;
+    max-height: 400px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(0, 0, 0, 0.2);
+    scroll-behavior: smooth;
+  }
+
+  .chat-messages::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+  }
+
+  .chat-messages::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 3px;
+  }
+
+  .chat-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.5);
+  }
+
+  .message {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+    animation: messageSlideIn 0.3s ease;
+    margin-bottom: 1rem;
+    width: 100%;
+    flex-shrink: 0;
+    box-sizing: border-box;
+  }
+
+  @keyframes messageSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes messageSentSlideIn {
+    from {
+      opacity: 0;
+      transform: translateX(30px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  .message.received {
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-direction: row;
+    padding-right: 15%;
+  }
+
+  .message.sent {
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: row;
+    padding-left: 15%;
+    padding-right: 0;
+    margin-left: auto;
+    animation: messageSentSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Message Avatar */
+  .message-avatar {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+  }
+
+  .message-avatar svg {
+    width: 18px;
+    height: 18px;
+    color: white;
+  }
+
+  /* Sent messages show avatar on the right side */
+
+  /* Message Content */
+  .message-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    max-width: 75%;
+    min-width: 0;
+    flex-shrink: 0;
+  }
+
+  .message.sent .message-content {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  /* Sent message user avatar */
+  .message.sent .message-avatar,
+  .sent-avatar {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    max-width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    box-shadow: 0 2px 8px rgba(34, 197, 94, 0.3);
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .message.sent .message-avatar svg,
+  .sent-avatar svg {
+    width: 18px;
+    height: 18px;
+    max-width: 18px;
+    max-height: 18px;
+    color: white;
+  }
+
+  .message.received .message-content {
+    align-items: flex-start;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .message-bubble {
+    padding: 0.875rem 1.125rem;
+    border-radius: 18px;
+    position: relative;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    min-width: 60px;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .message.received .message-bubble {
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.55),
+      rgba(59, 130, 246, 0.4)
+    );
+    border: 1px solid rgba(59, 130, 246, 0.6);
+    border-bottom-left-radius: 4px;
+    box-shadow:
+      0 2px 12px rgba(59, 130, 246, 0.3),
+      0 0 0 1px rgba(59, 130, 246, 0.15) inset,
+      0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  .message.sent .message-bubble {
+    background: linear-gradient(
+      135deg,
+      rgba(34, 197, 94, 0.7),
+      rgba(22, 163, 74, 0.55)
+    );
+    border: 1px solid rgba(34, 197, 94, 0.7);
+    border-bottom-right-radius: 4px;
+    box-shadow:
+      0 2px 12px rgba(34, 197, 94, 0.35),
+      0 0 0 1px rgba(34, 197, 94, 0.15) inset,
+      0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Bubble Tail (WhatsApp/iMessage style) */
+  .bubble-tail {
+    position: absolute;
+    width: 0;
+    height: 0;
+    bottom: 0;
+  }
+
+  .message.received .bubble-tail {
+    left: -8px;
+    border-left: 8px solid transparent;
+    border-bottom: 8px solid rgba(59, 130, 246, 0.55);
+    border-bottom-left-radius: 3px;
+    filter: drop-shadow(-2px 2px 2px rgba(0, 0, 0, 0.1));
+  }
+
+  .message.sent .bubble-tail {
+    right: -8px;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid rgba(34, 197, 94, 0.7);
+    border-bottom-right-radius: 3px;
+    filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.1));
+  }
+
+  .message-bubble p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.98);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .message-bubble p + p {
+    margin-top: 0.625rem;
+  }
+
+  .message-bubble strong {
+    color: rgba(255, 255, 255, 1);
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .message-time {
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    margin-top: 0.25rem;
+    padding: 0 0.5rem;
+    white-space: nowrap;
+  }
+
+  .message.sent .message-time {
+    text-align: right;
+    display: none; /* Hidden for sent messages, using inline time instead */
+  }
+
+  .message.received .message-time {
+    text-align: left;
+  }
+
+  /* Hide separate time for sent messages since we show it inline */
+  .message.sent > .message-content > .message-time {
+    display: none;
+  }
+
+  /* Sender name styling */
+  .sender-name {
+    font-weight: 700 !important;
+    color: rgba(255, 255, 255, 1) !important;
+    font-size: 0.8125rem !important;
+    margin-bottom: 0.25rem !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Message meta (time + checkmarks) */
+  .message-meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.375rem;
+    margin-top: 0.375rem;
+    padding-top: 0.25rem;
+  }
+
+  .message-time-inline {
+    font-size: 0.6875rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+
+  /* Message Status (checkmarks for sent messages) */
+  .message-status {
+    opacity: 0.85;
+    color: rgba(255, 255, 255, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 15px;
+  }
+
+  .message-status svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+  }
+
+  /* Double check animation */
+  .message-status.delivered svg {
+    color: #34d399;
+  }
+
+  /* Typing Indicator */
+  .typing-indicator {
+    margin-bottom: 0.75rem;
+  }
+
+  .typing-bubble {
+    padding: 1rem 1.25rem;
+    background: linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.18),
+      rgba(59, 130, 246, 0.1)
+    );
+    border: 1px solid rgba(59, 130, 246, 0.2);
+  }
+
+  .typing-dots {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .typing-dots span {
+    width: 8px;
+    height: 8px;
+    background: rgba(59, 130, 246, 0.8);
+    border-radius: 50%;
+    animation: typingDot 1.4s ease-in-out infinite;
+  }
+
+  .typing-dots span:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .typing-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .typing-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+
+  @keyframes typingDot {
+    0%,
+    60%,
+    100% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    30% {
+      transform: scale(1.3);
+      opacity: 1;
+    }
+  }
+
+  /* Chat Input Form */
+  .chat-input-form {
+    padding: 1.5rem;
+    border-top: 1px solid rgba(59, 130, 246, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .input-wrapper {
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .input-wrapper.focused {
+    transform: translateY(-2px);
+  }
+
+  /* Input Icons */
+  .input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: rgba(59, 130, 246, 0.5);
+    pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 1;
+  }
+
+  .input-wrapper.focused .input-icon {
+    color: rgba(59, 130, 246, 0.9);
+    transform: translateY(-50%) scale(1.1);
+  }
+
+  .input-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .message-input-wrapper {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-end;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.625rem 0.75rem;
+    border-radius: 24px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .message-input-wrapper.focused {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(34, 197, 94, 0.4);
+    box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.1);
+  }
+
+  .message-input-icon {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    color: rgba(59, 130, 246, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.25rem;
+    transition: all 0.3s ease;
+  }
+
+  .message-input-wrapper.focused .message-input-icon {
+    color: rgba(34, 197, 94, 0.8);
+  }
+
+  .message-input-icon svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .chat-input {
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.9375rem;
+    font-family: inherit;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .input-wrapper:has(.input-icon) .chat-input {
+    padding-left: 3rem;
+  }
+
+  .chat-input:focus {
+    outline: none;
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 0 0 3px rgba(59, 130, 246, 0.1),
+      0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .chat-input::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .chat-textarea {
+    resize: none;
+    min-height: 44px;
+    max-height: 120px;
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 0.5rem 0.75rem;
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.9375rem;
+    font-family: inherit;
+    line-height: 1.5;
+  }
+
+  .chat-textarea:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .chat-textarea::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  /* Send Button */
+  .send-button {
+    width: 46px;
+    height: 46px;
+    min-width: 46px;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 4px 14px rgba(34, 197, 94, 0.4),
+      0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .send-button::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #4ade80 0%, #22c55e 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 50%;
+  }
+
+  .send-button:hover:not(:disabled)::before {
+    opacity: 1;
+  }
+
+  .send-button:hover:not(:disabled) {
+    transform: scale(1.1);
+    box-shadow:
+      0 0 24px rgba(34, 197, 94, 0.6),
+      0 8px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .send-button:active:not(:disabled) {
+    transform: scale(0.92);
+    box-shadow:
+      0 2px 8px rgba(34, 197, 94, 0.4),
+      0 2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  .send-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: scale(1);
+    box-shadow: none;
+  }
+
+  .send-button-icon {
+    position: relative;
+    z-index: 1;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .send-button:hover:not(:disabled) .send-button-icon {
+    transform: translateX(2px);
+  }
+
+  .send-button-icon svg {
+    width: 100%;
+    height: 100%;
+    color: white;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+
+  /* Responsive */
+  @media (max-width: 1200px) {
+    .contact-grid-layout {
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    .contact-info-section,
+    .social-links {
+      max-width: 650px;
+      margin: 0 auto;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #contact {
+      padding: 6rem 1.5rem;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 6vw, 3rem);
+    }
+
+    .decoration-corner {
+      width: 40px;
+      height: 40px;
+    }
+
+    .contact-orb {
+      opacity: 0.5;
+    }
+
+    .info-card,
+    .social-link {
+      padding: 1.5rem;
+    }
+
+    .cta-box {
+      padding: 1.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    #contact {
+      padding: 5rem 1rem;
+    }
+
+    .section-title {
+      gap: 0.5rem;
+    }
+
+    .title-bracket {
+      font-size: 0.7em;
+    }
+
+    .decoration-corner {
+      display: none;
+    }
+
+    .contact-orb {
+      display: none;
+    }
+
+    .info-card,
+    .social-link,
+    .cta-box {
+      padding: 1.25rem;
+    }
+
+    .link-title {
+      font-size: 1.2rem;
+    }
+
+    /* Chat responsive */
+    .chat-form-container {
+      border-radius: 12px;
+    }
+
+    .chat-header {
+      padding: 1rem 1.25rem;
+    }
+
+    .chat-avatar {
+      width: 40px;
+      height: 40px;
+    }
+
+    .chat-messages {
+      padding: 1.25rem;
+      max-height: 350px;
+    }
+
+    .message-avatar {
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+    }
+
+    .message-avatar svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .message-content {
+      max-width: 85%;
+    }
+
+    .message.received {
+      padding-right: 10%;
+    }
+
+    .message.sent {
+      padding-left: 10%;
+    }
+
+    .message-bubble {
+      padding: 0.625rem 0.875rem;
+      border-radius: 16px;
+    }
+
+    .message-bubble p {
+      font-size: 0.875rem;
+    }
+
+    .chat-input-form {
+      padding: 1.25rem;
+    }
+
+    .chat-input {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    .input-wrapper:has(.input-icon) .chat-input {
+      padding-left: 2.75rem;
+    }
+
+    .input-icon {
+      width: 18px;
+      height: 18px;
+      left: 0.875rem;
+    }
+
+    .social-links-compact {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .social-link-compact {
+      padding: 0.875rem 1.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+</style>
