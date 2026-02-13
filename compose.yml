@@ -1,0 +1,14 @@
+services:
+  frontend:
+    build: .
+    environment:
+      HOST: 0.0.0.0
+      PORT: 8080
+    networks:
+      - frontend
+    ports: 
+      - "8080:8080"
+
+networks:
+  frontend:
+    driver: bridge
